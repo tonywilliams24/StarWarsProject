@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0" spacing="20.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tony.controller.PrimaryController">
+   <children>
+      <Label text="Star Wars API" />
+      <RadioButton fx:id="films" mnemonicParsing="false" text="Films">
+         <toggleGroup>
+            <ToggleGroup fx:id="RootAttributes" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="people" mnemonicParsing="false" text="People" toggleGroup="$RootAttributes" />
+      <RadioButton fx:id="planets" mnemonicParsing="false" text="Planets" toggleGroup="$RootAttributes" />
+      <RadioButton fx:id="species" mnemonicParsing="false" text="Species" toggleGroup="$RootAttributes" />
+      <RadioButton fx:id="starships" mnemonicParsing="false" text="Starships" toggleGroup="$RootAttributes" />
+      <RadioButton fx:id="vehicles" mnemonicParsing="false" text="Vehicles" toggleGroup="$RootAttributes" />
+      <TextField fx:id="search" promptText="Search For Item Here" />
+      <Button fx:id="primaryButton" defaultButton="true" onAction="#submit" prefHeight="40.0" prefWidth="60.0" text="Submit" />
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>
