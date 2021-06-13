@@ -80,7 +80,7 @@ public class DbConnection {
         for (URL filmUrl : people.getFilms()) {
             int filmsid = extractIdFromUrl(filmUrl);
             try (Connection conn = createDbConnection()) {
-                newTableRow = getInsertIntoPreparedStatement(peopleid, filmsid, conn).executeUpdate();
+                newTableRow = getInsertIntoPeopleFilmsPreparedStatement(peopleid, filmsid, conn).executeUpdate();
             } catch (SQLException | ClassNotFoundException e) {
                 System.out.println(e);
             }
@@ -94,7 +94,7 @@ public class DbConnection {
         for (URL peopleUrl : film.getCharacters()) {
             int peopleid = extractIdFromUrl(peopleUrl);
             try (Connection conn = createDbConnection()) {
-                newTableRow = getInsertIntoPreparedStatement(peopleid, filmsid, conn).executeUpdate();
+                newTableRow = getInsertIntoPeopleFilmsPreparedStatement(peopleid, filmsid, conn).executeUpdate();
             } catch (SQLException | ClassNotFoundException e) {
                 System.out.println(e);
             }
@@ -107,16 +107,38 @@ public class DbConnection {
         int peopleid = people.getPeopleid();
         int planetsid = extractIdFromUrl(people.getHomeworld());
         try (Connection conn = createDbConnection()) {
-            newTableRow = getInsertIntoPreparedStatement(peopleid, filmsid, conn).executeUpdate();
+            newTableRow = getInsertIntoPeoplePlanetsPreparedStatement(peopleid, planetsid, conn).executeUpdate();
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e);
         }
+        return newTableRow;
     }
 
-    private static PreparedStatement getInsertIntoPreparedStatement(int peopleid, int filmsid, Connection conn) throws SQLException {
+    public static int insertIntoPeoplePlanets(Planets planet) {
+        int newTableRow = -1;
+        int planetsid = planet.getPlanetsid();
+        for (URL peopleUrl : planet.getResidents()) {
+            int peopleid = extractIdFromUrl(peopleUrl);
+            try (Connection conn = createDbConnection()) {
+                newTableRow = getInsertIntoPeoplePlanetsPreparedStatement(peopleid, planetsid, conn).executeUpdate();
+            } catch (SQLException | ClassNotFoundException e) {
+                System.out.println(e);
+            }
+        }
+        return newTableRow;
+    }
+
+    private static PreparedStatement getInsertIntoPeopleFilmsPreparedStatement(int peopleid, int filmsid, Connection conn) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_films(peopleid, filmsid) VALUES (?,?)");
         preparedStatement.setInt(1, peopleid);
         preparedStatement.setInt(2, filmsid);
+        return preparedStatement;
+    }
+
+    private static PreparedStatement getInsertIntoPeoplePlanetsPreparedStatement(int peopleid, int planetsid, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_planets(peopleid, planetsid) VALUES (?,?)");
+        preparedStatement.setInt(1, peopleid);
+        preparedStatement.setInt(2, planetsid);
         return preparedStatement;
     }
 
@@ -137,7 +159,7 @@ public class DbConnection {
         preparedStatement.setString(7, people.getEye_color());
         preparedStatement.setString(8, people.getBirth_year());
         preparedStatement.setString(9, people.getGender());
-        preparedStatement.setString(10, people.getHomeworld());
+        preparedStatement.setURL(10, people.getHomeworld());
         preparedStatement.setString(11, people.getCreated());
         preparedStatement.setString(12, people.getEdited());
         preparedStatement.setString(13, String.valueOf(people.getUrl()));
