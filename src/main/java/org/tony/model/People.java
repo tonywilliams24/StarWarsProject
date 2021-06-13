@@ -13,7 +13,7 @@ public class People extends StarWarsObj {
     String eye_color;
     String birth_year;
     String gender;
-    String homeworld;
+    URL homeworld;
     List<URL> films;
     List<URL> species;
     List<URL> vehicles;
@@ -97,11 +97,11 @@ public class People extends StarWarsObj {
         this.gender = gender;
     }
 
-    public String getHomeworld() {
+    public URL getHomeworld() {
         return homeworld;
     }
 
-    public void setHomeworld(String homeworld) {
+    public void setHomeworld(URL homeworld) {
         this.homeworld = homeworld;
     }
 

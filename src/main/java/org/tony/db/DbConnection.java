@@ -4,9 +4,11 @@ import org.tony.model.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
 import java.util.Properties;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class DbConnection {
@@ -70,6 +72,58 @@ public class DbConnection {
             System.out.println(e);
         }
         return newTableRow;
+    }
+
+    public static int insertIntoPeopleFilms(People people) {
+        int newTableRow = -1;
+        int peopleid = people.getPeopleid();
+        for (URL filmUrl : people.getFilms()) {
+            int filmsid = extractIdFromUrl(filmUrl);
+            try (Connection conn = createDbConnection()) {
+                newTableRow = getInsertIntoPreparedStatement(peopleid, filmsid, conn).executeUpdate();
+            } catch (SQLException | ClassNotFoundException e) {
+                System.out.println(e);
+            }
+        }
+        return newTableRow;
+    }
+
+    public static int insertIntoPeopleFilms(Films film) {
+        int newTableRow = -1;
+        int filmsid = film.getFilmsid();
+        for (URL peopleUrl : film.getCharacters()) {
+            int peopleid = extractIdFromUrl(peopleUrl);
+            try (Connection conn = createDbConnection()) {
+                newTableRow = getInsertIntoPreparedStatement(peopleid, filmsid, conn).executeUpdate();
+            } catch (SQLException | ClassNotFoundException e) {
+                System.out.println(e);
+            }
+        }
+        return newTableRow;
+    }
+
+    public static int insertIntoPeoplePlanets(People people) {
+        int newTableRow = -1;
+        int peopleid = people.getPeopleid();
+        int planetsid = extractIdFromUrl(people.getHomeworld());
+        try (Connection conn = createDbConnection()) {
+            newTableRow = getInsertIntoPreparedStatement(peopleid, filmsid, conn).executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+    }
+
+    private static PreparedStatement getInsertIntoPreparedStatement(int peopleid, int filmsid, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_films(peopleid, filmsid) VALUES (?,?)");
+        preparedStatement.setInt(1, peopleid);
+        preparedStatement.setInt(2, filmsid);
+        return preparedStatement;
+    }
+
+    private static int extractIdFromUrl(URL url) {
+        Pattern idPattern = Pattern.compile("\\d+");
+        Matcher idMatch = idPattern.matcher(String.valueOf(url));
+        return Integer.parseInt(idMatch.group(0));
     }
 
     private static PreparedStatement getInsertIntoPreparedStatement(People people, Connection conn) throws SQLException {
