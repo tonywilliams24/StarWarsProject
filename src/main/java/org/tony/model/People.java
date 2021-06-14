@@ -6,8 +6,8 @@ import java.util.List;
 public class People extends StarWarsObj {
     int peopleid;
     String name;
-    int height;
-    int mass;
+    String height;
+    String mass;
     String hair_color;
     String skin_color;
     String eye_color;
@@ -41,19 +41,19 @@ public class People extends StarWarsObj {
         this.name = name;
     }
 
-    public int getHeight() {
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 
-    public int getMass() {
+    public String getMass() {
         return mass;
     }
 
-    public void setMass(int mass) {
+    public void setMass(String mass) {
         this.mass = mass;
     }
 

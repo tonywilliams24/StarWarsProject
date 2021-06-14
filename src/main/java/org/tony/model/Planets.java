@@ -1,25 +1,27 @@
 package org.tony.model;
 
-import java.math.BigInteger;
 import java.net.URL;
 import java.util.List;
 
 public class Planets extends StarWarsObj {
     int planetsid;
     String name;
-    int rotational_period;
-    int orbital_period;
-    int diameter;
+    String rotation_period;
+    String orbital_period;
+    String diameter;
     String climate;
     String gravity;
     String terrain;
-    int surface_water;
-    long population;
+    String surface_water;
+    String population;
     List<URL> residents;
     List<URL> films;
     String created;
     String edited;
     URL url;
+
+    public Planets() {
+    }
 
     public Planets(String climate) {
         this.climate = climate;
@@ -41,27 +43,27 @@ public class Planets extends StarWarsObj {
         this.name = name;
     }
 
-    public int getRotational_period() {
-        return rotational_period;
+    public String getRotation_period() {
+        return rotation_period;
     }
 
-    public void setRotational_period(int rotational_period) {
-        this.rotational_period = rotational_period;
+    public void setRotation_period(String rotation_period) {
+        this.rotation_period = rotation_period;
     }
 
-    public int getOrbital_period() {
+    public String getOrbital_period() {
         return orbital_period;
     }
 
-    public void setOrbital_period(int orbital_period) {
+    public void setOrbital_period(String orbital_period) {
         this.orbital_period = orbital_period;
     }
 
-    public int getDiameter() {
+    public String getDiameter() {
         return diameter;
     }
 
-    public void setDiameter(int diameter) {
+    public void setDiameter(String diameter) {
         this.diameter = diameter;
     }
 
@@ -89,19 +91,19 @@ public class Planets extends StarWarsObj {
         this.terrain = terrain;
     }
 
-    public int getSurface_water() {
+    public String getSurface_water() {
         return surface_water;
     }
 
-    public void setSurface_water(int surface_water) {
+    public void setSurface_water(String surface_water) {
         this.surface_water = surface_water;
     }
 
-    public long getPopulation() {
+    public String getPopulation() {
         return population;
     }
 
-    public void setPopulation(long population) {
+    public void setPopulation(String population) {
         this.population = population;
     }
 

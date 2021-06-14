@@ -11,7 +11,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import org.tony.App;
 import org.tony.db.DbConnection;
-import org.tony.model.Films;
+import org.tony.model.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -58,13 +58,90 @@ public class PrimaryController {
 
     @FXML
     void submit(ActionEvent event) throws IOException {
-        URL testurl = new URL("file:src/main/resources/org/tony/json.json");
-        System.out.println("clicked");
-        ObjectMapper mapper = new ObjectMapper();
-        System.out.println(new URL("https://swapi.dev/api/vehicles/4/"));
-        Films film = mapper.readValue(testurl,Films.class);
-        System.out.println(film.getOpening_crawl());
-        DbConnection.getAllTables();
+        File folder = new File("src/main/resources/org/tony/jsons/people/");
+        File[] listOfFiles = folder.listFiles();
+        assert listOfFiles != null;
+        for(File f: listOfFiles) {
+            if(!f.getPath().equals("src/main/resources/org/tony/jsons/people/.DS_Store")) {
+                System.out.println(f);
+                ObjectMapper mapper = new ObjectMapper();
+                People people = mapper.readValue(f, People.class);
+                System.out.println(people.getUrl());
+                people.setPeopleid(StarWarsObj.extractIdFromUrl(people.getUrl()));
+                DbConnection.insertIntoStarWarsApiDb(people);
+            }
+        }
+
+        folder = new File("src/main/resources/org/tony/jsons/films/");
+        listOfFiles = folder.listFiles();
+        assert listOfFiles != null;
+        for(File f: listOfFiles) {
+            if(!f.getPath().equals("src/main/resources/org/tony/jsons/films/.DS_Store")) {
+                System.out.println(f);
+                ObjectMapper mapper = new ObjectMapper();
+                Films films = mapper.readValue(f, Films.class);
+                System.out.println(films.getUrl());
+                films.setFilmsid(StarWarsObj.extractIdFromUrl(films.getUrl()));
+                DbConnection.insertIntoStarWarsApiDb(films);
+            }
+        }
+
+        folder = new File("src/main/resources/org/tony/jsons/planets/");
+        listOfFiles = folder.listFiles();
+        assert listOfFiles != null;
+        for(File f: listOfFiles) {
+            if(!f.getPath().equals("src/main/resources/org/tony/jsons/planets/.DS_Store")) {
+                System.out.println(f);
+                ObjectMapper mapper = new ObjectMapper();
+                Planets planets = mapper.readValue(f, Planets.class);
+                System.out.println(planets.getUrl());
+                planets.setPlanetsid(StarWarsObj.extractIdFromUrl(planets.getUrl()));
+                DbConnection.insertIntoStarWarsApiDb(planets);
+            }
+        }
+
+        folder = new File("src/main/resources/org/tony/jsons/species/");
+        listOfFiles = folder.listFiles();
+        assert listOfFiles != null;
+        for(File f: listOfFiles) {
+            if(!f.getPath().equals("src/main/resources/org/tony/jsons/species/.DS_Store")) {
+                System.out.println(f);
+                ObjectMapper mapper = new ObjectMapper();
+                Species species = mapper.readValue(f, Species.class);
+                System.out.println(species.getUrl());
+                species.setSpeciesid(StarWarsObj.extractIdFromUrl(species.getUrl()));
+                DbConnection.insertIntoStarWarsApiDb(species);
+            }
+        }
+
+        folder = new File("src/main/resources/org/tony/jsons/starships/");
+        listOfFiles = folder.listFiles();
+        assert listOfFiles != null;
+        for(File f: listOfFiles) {
+            if(!f.getPath().equals("src/main/resources/org/tony/jsons/starships/.DS_Store")) {
+                System.out.println(f);
+                ObjectMapper mapper = new ObjectMapper();
+                Starships starships = mapper.readValue(f, Starships.class);
+                System.out.println(starships.getUrl());
+                starships.setStarshipsid(StarWarsObj.extractIdFromUrl(starships.getUrl()));
+                DbConnection.insertIntoStarWarsApiDb(starships);
+            }
+        }
+
+        folder = new File("src/main/resources/org/tony/jsons/vehicles/");
+        listOfFiles = folder.listFiles();
+        assert listOfFiles != null;
+        for(File f: listOfFiles) {
+            if(!f.getPath().equals("src/main/resources/org/tony/jsons/vehicles/.DS_Store")) {
+                System.out.println(f);
+                ObjectMapper mapper = new ObjectMapper();
+                Vehicles vehicles = mapper.readValue(f, Vehicles.class);
+                System.out.println(vehicles.getUrl());
+                vehicles.setVehiclesid(StarWarsObj.extractIdFromUrl(vehicles.getUrl()));
+                DbConnection.insertIntoStarWarsApiDb(vehicles);
+            }
+        }
+
 
     }
 

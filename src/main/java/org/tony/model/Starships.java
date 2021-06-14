@@ -1,5 +1,7 @@
 package org.tony.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.net.URL;
 import java.util.List;
 
@@ -9,14 +11,15 @@ public class Starships extends StarWarsObj {
     String model;
     String manufacturer;
     long cost_in_credits;
-    int length;
+    float length;
     int max_atmosphering_speed;
     int crew;
     int passengers;
     long cargo_capacity;
     String consumables;
     float hyperdrive_rating;
-    int MGLT;
+    String MGLT;
+    String mglt;
     String starship_class;
     List<URL> films;
     List<URL> pilots;
@@ -25,6 +28,15 @@ public class Starships extends StarWarsObj {
     URL url;
 
     public Starships() {
+    }
+
+    public String getMGLT() {
+        return MGLT;
+    }
+
+    @JsonProperty("MGLT")
+    public void setMGLT(String MGLT) {
+        this.MGLT = MGLT;
     }
 
     public int getStarshipsid() {
@@ -67,11 +79,11 @@ public class Starships extends StarWarsObj {
         this.cost_in_credits = cost_in_credits;
     }
 
-    public int getLength() {
+    public float getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(float length) {
         this.length = length;
     }
 
@@ -121,14 +133,6 @@ public class Starships extends StarWarsObj {
 
     public void setHyperdrive_rating(float hyperdrive_rating) {
         this.hyperdrive_rating = hyperdrive_rating;
-    }
-
-    public int getMGLT() {
-        return MGLT;
-    }
-
-    public void setMGLT(int MGLT) {
-        this.MGLT = MGLT;
     }
 
     public String getStarship_class() {

@@ -6,12 +6,13 @@ import java.util.List;
 public class Species extends StarWarsObj {
     int speciesid;
     String name;
+    String classification;
     String designation;
-    int average_height;
+    String average_height;
     String skin_colors;
     String hair_colors;
     String eye_colors;
-    int average_lifespan;
+    String average_lifespan;
     String homeworld;
     String language;
     List<URL> people;
@@ -21,6 +22,14 @@ public class Species extends StarWarsObj {
     URL url;
 
     public Species() {
+    }
+
+    public String getClassification() {
+        return classification;
+    }
+
+    public void setClassification(String classification) {
+        this.classification = classification;
     }
 
     public int getSpeciesid() {
@@ -47,11 +56,11 @@ public class Species extends StarWarsObj {
         this.designation = designation;
     }
 
-    public int getAverage_height() {
+    public String getAverage_height() {
         return average_height;
     }
 
-    public void setAverage_height(int average_height) {
+    public void setAverage_height(String average_height) {
         this.average_height = average_height;
     }
 
@@ -79,11 +88,11 @@ public class Species extends StarWarsObj {
         this.eye_colors = eye_colors;
     }
 
-    public int getAverage_lifespan() {
+    public String getAverage_lifespan() {
         return average_lifespan;
     }
 
-    public void setAverage_lifespan(int average_lifespan) {
+    public void setAverage_lifespan(String average_lifespan) {
         this.average_lifespan = average_lifespan;
     }
 
