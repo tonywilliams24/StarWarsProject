@@ -140,13 +140,69 @@ public class DbConnection {
         return newTableRow;
     }
 
-    public static int insertIntoPeopleSpecies(Species Species) {
+    public static int insertIntoPeopleSpecies(Species species) {
         int newTableRow = -1;
-        int speciesid = Species.getSpeciesid();
-        for (URL peopleUrl : Species.getPeople()) {
+        int speciesid = species.getSpeciesid();
+        for (URL peopleUrl : species.getPeople()) {
             int peopleid = StarWarsObj.extractIdFromUrl(peopleUrl);
             try (Connection conn = createDbConnection()) {
                 newTableRow = getInsertIntoPeopleSpeciesPreparedStatement(peopleid, speciesid, conn).executeUpdate();
+            } catch (SQLException | ClassNotFoundException e) {
+                System.out.println(e);
+            }
+        }
+        return newTableRow;
+    }
+
+    public static int insertIntoPeopleStarships(People people) {
+        int newTableRow = -1;
+        int peopleid = people.getPeopleid();
+        for (URL starshipsUrl : people.getStarships()) {
+            int starshipsid = StarWarsObj.extractIdFromUrl(starshipsUrl);
+            try (Connection conn = createDbConnection()) {
+                newTableRow = getInsertIntoPeopleStarshipsPreparedStatement(peopleid, starshipsid, conn).executeUpdate();
+            } catch (SQLException | ClassNotFoundException e) {
+                System.out.println(e);
+            }
+        }
+        return newTableRow;
+    }
+
+    public static int insertIntoPeopleStarships(Starships starships) {
+        int newTableRow = -1;
+        int starshipsid = starships.getStarshipsid();
+        for (URL peopleUrl : starships.getPilots()) {
+            int peopleid = StarWarsObj.extractIdFromUrl(peopleUrl);
+            try (Connection conn = createDbConnection()) {
+                newTableRow = getInsertIntoPeopleStarshipsPreparedStatement(peopleid, starshipsid, conn).executeUpdate();
+            } catch (SQLException | ClassNotFoundException e) {
+                System.out.println(e);
+            }
+        }
+        return newTableRow;
+    }
+
+    public static int insertIntoPeopleVehicles(People people) {
+        int newTableRow = -1;
+        int peopleid = people.getPeopleid();
+        for (URL vehiclesUrl : people.getVehicles()) {
+            int vehiclesid = StarWarsObj.extractIdFromUrl(vehiclesUrl);
+            try (Connection conn = createDbConnection()) {
+                newTableRow = getInsertIntoPeopleVehiclesPreparedStatement(peopleid, vehiclesid, conn).executeUpdate();
+            } catch (SQLException | ClassNotFoundException e) {
+                System.out.println(e);
+            }
+        }
+        return newTableRow;
+    }
+
+    public static int insertIntoPeopleVehicles(Vehicles vehicles) {
+        int newTableRow = -1;
+        int vehiclesid = vehicles.getVehiclesid();
+        for (URL peopleUrl : vehicles.getPilots()) {
+            int peopleid = StarWarsObj.extractIdFromUrl(peopleUrl);
+            try (Connection conn = createDbConnection()) {
+                newTableRow = getInsertIntoPeopleVehiclesPreparedStatement(peopleid, vehiclesid, conn).executeUpdate();
             } catch (SQLException | ClassNotFoundException e) {
                 System.out.println(e);
             }
@@ -203,6 +259,62 @@ public class DbConnection {
             int filmsid = StarWarsObj.extractIdFromUrl(filmsUrl);
             try (Connection conn = createDbConnection()) {
                 newTableRow = getInsertIntoFilmsSpeciesPreparedStatement(filmsid, speciesid, conn).executeUpdate();
+            } catch (SQLException | ClassNotFoundException e) {
+                System.out.println(e);
+            }
+        }
+        return newTableRow;
+    }
+
+    public static int insertIntoFilmsStarships(Films films) {
+        int newTableRow = -1;
+        int filmsid = films.getFilmsid();
+        for (URL starshipsUrl : films.getStarships()) {
+            int starshipsid = StarWarsObj.extractIdFromUrl(starshipsUrl);
+            try (Connection conn = createDbConnection()) {
+                newTableRow = getInsertIntoFilmsStarshipsPreparedStatement(filmsid, starshipsid, conn).executeUpdate();
+            } catch (SQLException | ClassNotFoundException e) {
+                System.out.println(e);
+            }
+        }
+        return newTableRow;
+    }
+
+    public static int insertIntoFilmsStarships(Starships starships) {
+        int newTableRow = -1;
+        int starshipsid = starships.getStarshipsid();
+        for (URL filmsUrl : starships.getFilms()) {
+            int filmsid = StarWarsObj.extractIdFromUrl(filmsUrl);
+            try (Connection conn = createDbConnection()) {
+                newTableRow = getInsertIntoFilmsStarshipsPreparedStatement(filmsid, starshipsid, conn).executeUpdate();
+            } catch (SQLException | ClassNotFoundException e) {
+                System.out.println(e);
+            }
+        }
+        return newTableRow;
+    }
+
+    public static int insertIntoFilmsVehicles(Films films) {
+        int newTableRow = -1;
+        int filmsid = films.getFilmsid();
+        for (URL vehiclesUrl : films.getVehicles()) {
+            int vehiclesid = StarWarsObj.extractIdFromUrl(vehiclesUrl);
+            try (Connection conn = createDbConnection()) {
+                newTableRow = getInsertIntoFilmsVehiclesPreparedStatement(filmsid, vehiclesid, conn).executeUpdate();
+            } catch (SQLException | ClassNotFoundException e) {
+                System.out.println(e);
+            }
+        }
+        return newTableRow;
+    }
+
+    public static int insertIntoFilmsVehicles(Vehicles vehicles) {
+        int newTableRow = -1;
+        int vehiclesid = vehicles.getVehiclesid();
+        for (URL filmsUrl : vehicles.getFilms()) {
+            int filmsid = StarWarsObj.extractIdFromUrl(filmsUrl);
+            try (Connection conn = createDbConnection()) {
+                newTableRow = getInsertIntoFilmsVehiclesPreparedStatement(filmsid, vehiclesid, conn).executeUpdate();
             } catch (SQLException | ClassNotFoundException e) {
                 System.out.println(e);
             }
