@@ -1,4 +1,4 @@
-package org.tony.model;
+package org.tony.script.model;
 
 import java.net.URL;
 import java.util.List;
@@ -13,11 +13,11 @@ public class People extends StarWarsObj {
     private String eye_color;
     private String birth_year;
     private String gender;
-    private Planets homeworld;
-    private List<Species> species;
-    private List<Films> films;
-    private List<Starships> starships;
-    private List<Vehicles> vehicles;
+    private URL homeworld;
+    private List<URL> films;
+    private List<URL> species;
+    private List<URL> vehicles;
+    private List<URL> starships;
     private String created;
     private String edited;
     private URL url;
@@ -97,43 +97,43 @@ public class People extends StarWarsObj {
         this.gender = gender;
     }
 
-    public Planets getHomeworld() {
+    public URL getHomeworld() {
         return homeworld;
     }
 
-    public void setHomeworld(Planets homeworld) {
+    public void setHomeworld(URL homeworld) {
         this.homeworld = homeworld;
     }
 
-    public List<Films> getFilms() {
+    public List<URL> getFilms() {
         return films;
     }
 
-    public void setFilms(List<Films> films) {
+    public void setFilms(List<URL> films) {
         this.films = films;
     }
 
-    public List<Species> getSpecies() {
+    public List<URL> getSpecies() {
         return species;
     }
 
-    public void setSpecies(List<Species> species) {
+    public void setSpecies(List<URL> species) {
         this.species = species;
     }
 
-    public List<Vehicles> getVehicles() {
+    public List<URL> getVehicles() {
         return vehicles;
     }
 
-    public void setVehicles(List<Vehicles> vehicles) {
+    public void setVehicles(List<URL> vehicles) {
         this.vehicles = vehicles;
     }
 
-    public List<Starships> getStarships() {
+    public List<URL> getStarships() {
         return starships;
     }
 
-    public void setStarships(List<Starships> starships) {
+    public void setStarships(List<URL> starships) {
         this.starships = starships;
     }
 

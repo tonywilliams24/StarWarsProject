@@ -1,4 +1,4 @@
-package org.tony.model;
+package org.tony.script.model;
 
 import java.net.URL;
 import java.util.List;
@@ -14,8 +14,8 @@ public class Planets extends StarWarsObj {
     private String terrain;
     private String surface_water;
     private String population;
-    private List<People> residents;
-    private List<Films> films;
+    private List<URL> residents;
+    private List<URL> films;
     private String created;
     private String edited;
     private URL url;
@@ -107,19 +107,19 @@ public class Planets extends StarWarsObj {
         this.population = population;
     }
 
-    public List<People> getResidents() {
+    public List<URL> getResidents() {
         return residents;
     }
 
-    public void setResidents(List<People> residents) {
+    public void setResidents(List<URL> residents) {
         this.residents = residents;
     }
 
-    public List<Films> getFilms() {
+    public List<URL> getFilms() {
         return films;
     }
 
-    public void setFilms(List<Films> films) {
+    public void setFilms(List<URL> films) {
         this.films = films;
     }
 

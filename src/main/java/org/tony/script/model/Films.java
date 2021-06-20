@@ -1,4 +1,4 @@
-package org.tony.model;
+package org.tony.script.model;
 
 import java.net.URL;
 import java.util.List;
@@ -11,11 +11,11 @@ public class Films extends StarWarsObj {
     private String director;
     private String producer;
     private String release_date;
-    private List<Species> species;
-    private List<Starships> starships;
-    private List<Vehicles> vehicles;
-    private List<People> characters;
-    private List<Planets> planets;
+    private List<URL> species;
+    private List<URL> starships;
+    private List<URL> vehicles;
+    private List<URL> characters;
+    private List<URL> planets;
     private URL url;
     private String created;
     private String edited;
@@ -72,43 +72,43 @@ public class Films extends StarWarsObj {
         this.release_date = release_date;
     }
 
-    public List<Species> getSpecies() {
+    public List<URL> getSpecies() {
         return species;
     }
 
-    public void setSpecies(List<Species> species) {
+    public void setSpecies(List<URL> species) {
         this.species = species;
     }
 
-    public List<Starships> getStarships() {
+    public List<URL> getStarships() {
         return starships;
     }
 
-    public void setStarships(List<Starships> starships) {
+    public void setStarships(List<URL> starships) {
         this.starships = starships;
     }
 
-    public List<Vehicles> getVehicles() {
+    public List<URL> getVehicles() {
         return vehicles;
     }
 
-    public void setVehicles(List<Vehicles> vehicles) {
+    public void setVehicles(List<URL> vehicles) {
         this.vehicles = vehicles;
     }
 
-    public List<People> getCharacters() {
+    public List<URL> getCharacters() {
         return characters;
     }
 
-    public void setCharacters(List<People> characters) {
+    public void setCharacters(List<URL> characters) {
         this.characters = characters;
     }
 
-    public List<Planets> getPlanets() {
+    public List<URL> getPlanets() {
         return planets;
     }
 
-    public void setPlanets(List<Planets> planets) {
+    public void setPlanets(List<URL> planets) {
         this.planets = planets;
     }
 

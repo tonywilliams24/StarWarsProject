@@ -4,23 +4,23 @@ import java.net.URL;
 import java.util.List;
 
 public class Vehicles extends StarWarsObj {
-    int vehiclesid;
-    String name;
-    String model;
-    String manufacturer;
-    String cost_in_credits;
-    String length;
-    String max_atmosphering_speed;
-    String crew;
-    String passengers;
-    String cargo_capacity;
-    String consumables;
-    String vehicle_class;
-    List<URL> films;
-    List<URL> pilots;
-    String created;
-    String edited;
-    URL url;
+    private int vehiclesid;
+    private String name;
+    private String model;
+    private String manufacturer;
+    private String cost_in_credits;
+    private String length;
+    private String max_atmosphering_speed;
+    private String crew;
+    private String passengers;
+    private String cargo_capacity;
+    private String consumables;
+    private String vehicle_class;
+    private List<Films> films;
+    private List<People> pilots;
+    private String created;
+    private String edited;
+    private URL url;
 
     public Vehicles() {
     }
@@ -121,19 +121,19 @@ public class Vehicles extends StarWarsObj {
         this.vehicle_class = vehicle_class;
     }
 
-    public List<URL> getFilms() {
+    public List<Films> getFilms() {
         return films;
     }
 
-    public void setFilms(List<URL> films) {
+    public void setFilms(List<Films> films) {
         this.films = films;
     }
 
-    public List<URL> getPilots() {
+    public List<People> getPilots() {
         return pilots;
     }
 
-    public void setPilots(List<URL> pilots) {
+    public void setPilots(List<People> pilots) {
         this.pilots = pilots;
     }
 

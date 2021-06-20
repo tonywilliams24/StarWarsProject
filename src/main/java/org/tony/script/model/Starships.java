@@ -1,4 +1,4 @@
-package org.tony.model;
+package org.tony.script.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -20,8 +20,8 @@ public class Starships extends StarWarsObj {
     private String hyperdrive_rating;
     private String MGLT;
     private String starship_class;
-    private List<Films> films;
-    private List<People> pilots;
+    private List<URL> films;
+    private List<URL> pilots;
     private String created;
     private String edited;
     private URL url;
@@ -142,19 +142,19 @@ public class Starships extends StarWarsObj {
         this.starship_class = starship_class;
     }
 
-    public List<Films> getFilms() {
+    public List<URL> getFilms() {
         return films;
     }
 
-    public void setFilms(List<Films> films) {
+    public void setFilms(List<URL> films) {
         this.films = films;
     }
 
-    public List<People> getPilots() {
+    public List<URL> getPilots() {
         return pilots;
     }
 
-    public void setPilots(List<People> pilots) {
+    public void setPilots(List<URL> pilots) {
         this.pilots = pilots;
     }
 

@@ -1,4 +1,4 @@
-package org.tony.model;
+package org.tony.script.model;
 
 import java.net.URL;
 import java.util.List;
@@ -15,8 +15,8 @@ public class Species extends StarWarsObj {
     private String average_lifespan;
     private String homeworld;
     private String language;
-    private List<People> people;
-    private List<Films> films;
+    private List<URL> people;
+    private List<URL> films;
     private String created;
     private String edited;
     private URL url;
@@ -112,19 +112,19 @@ public class Species extends StarWarsObj {
         this.language = language;
     }
 
-    public List<People> getPeople() {
+    public List<URL> getPeople() {
         return people;
     }
 
-    public void setPeople(List<People> people) {
+    public void setPeople(List<URL> people) {
         this.people = people;
     }
 
-    public List<Films> getFilms() {
+    public List<URL> getFilms() {
         return films;
     }
 
-    public void setFilms(List<Films> films) {
+    public void setFilms(List<URL> films) {
         this.films = films;
     }
 
