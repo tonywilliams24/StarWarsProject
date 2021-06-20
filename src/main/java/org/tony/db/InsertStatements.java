@@ -2,7 +2,6 @@ package org.tony.db;
 
 import org.tony.model.*;
 
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -10,148 +9,81 @@ import java.sql.SQLException;
 
 public class InsertStatements {
 
-    public static void insertIntoStarWarsApiDb(StarWarsObj starWarsObj) throws SQLException, ClassNotFoundException {
+    public static void insertIntoTable(StarWarsObj starWarsObj) throws SQLException, ClassNotFoundException {
         Connection conn = DbConnection.createDbConnection();
         PreparedStatement preparedStatement = getInsertIntoPreparedStatement(starWarsObj, conn);
         preparedStatement.executeUpdate();
     }
 
-    public static void insertIntoPeopleFilmsTable(People people, Films film) throws SQLException, ClassNotFoundException {
+    public static void insertIntoTable(StarWarsObj starWarsObj0, StarWarsObj starWarsObj1) throws SQLException, ClassNotFoundException {
         Connection conn = DbConnection.createDbConnection();
-        PreparedStatement preparedStatement = getInsertIntoPeopleFilmsPreparedStatement(people, film, conn);
-        preparedStatement.executeUpdate();
-    }
-
-    public static void insertIntoPeoplePlanetsTable(People people, Planets planet) throws SQLException, ClassNotFoundException {
-        Connection conn = DbConnection.createDbConnection();
-        PreparedStatement preparedStatement = getInsertIntoPeoplePlanetsPreparedStatement(people, planet, conn);
-        preparedStatement.executeUpdate();
-    }
-
-    public static void insertIntoPeopleSpeciesTable(People people, Species species) throws SQLException, ClassNotFoundException {
-        Connection conn = DbConnection.createDbConnection();
-        PreparedStatement preparedStatement = getInsertIntoPeopleSpeciesPreparedStatement(people, species, conn);
-        preparedStatement.executeUpdate();
-    }
-
-    public static void insertIntoPeopleStarshipsTable(People people, Starships starship) throws SQLException, ClassNotFoundException {
-        Connection conn = DbConnection.createDbConnection();
-        PreparedStatement preparedStatement = getInsertIntoPeopleStarshipsPreparedStatement(people, starship, conn);
-        preparedStatement.executeUpdate();
-    }
-
-    public static void insertIntoPeopleVehiclesTable(People people, Vehicles vehicle) throws SQLException, ClassNotFoundException {
-        Connection conn = DbConnection.createDbConnection();
-        PreparedStatement preparedStatement = getInsertIntoPeopleVehiclesPreparedStatement(people, vehicle, conn);
-        preparedStatement.executeUpdate();
-    }
-
-    public static void insertIntoFilmsPlanetsTable(Films film, Planets planet) throws SQLException, ClassNotFoundException {
-        Connection conn = DbConnection.createDbConnection();
-        PreparedStatement preparedStatement = getInsertIntoFilmsPlanetsPreparedStatement(film, planet, conn);
-        preparedStatement.executeUpdate();
-    }
-
-    public static void insertIntoFilmsSpeciesTable(Films film, Species species) throws SQLException, ClassNotFoundException {
-        Connection conn = DbConnection.createDbConnection();
-        PreparedStatement preparedStatement = getInsertIntoFilmsSpeciesPreparedStatement(film, species, conn);
-        preparedStatement.executeUpdate();
-    }
-
-    public static void insertIntoFilmsStarshipsTable(Films film, Starships starship) throws SQLException, ClassNotFoundException {
-        Connection conn = DbConnection.createDbConnection();
-        PreparedStatement preparedStatement = getInsertIntoFilmsStarshipsPreparedStatement(film, starship, conn);
-        preparedStatement.executeUpdate();
-    }
-
-    public static void insertIntoFilmsVehiclesTable(Films film, Vehicles vehicle) throws SQLException, ClassNotFoundException {
-        Connection conn = DbConnection.createDbConnection();
-        PreparedStatement preparedStatement = getInsertIntoFilmsVehiclesPreparedStatement(film, vehicle, conn);
+        PreparedStatement preparedStatement = getInsertIntoPreparedStatement(starWarsObj0,starWarsObj1, conn);
         preparedStatement.executeUpdate();
     }
 
     public static PreparedStatement getInsertIntoPreparedStatement(StarWarsObj starWarsObj, Connection conn) throws SQLException {
-        PreparedStatement preparedStatement;
         if (starWarsObj instanceof People) {
-            preparedStatement = getInsertIntoPreparedStatement((People) starWarsObj, conn);
+            return getInsertIntoPeopleTablePreparedStatement((People) starWarsObj, conn);
         } else if (starWarsObj instanceof Films) {
-            preparedStatement = getInsertIntoPreparedStatement((Films) starWarsObj, conn);
+            return getInsertIntoFilmsTablePreparedStatement((Films) starWarsObj, conn);
         } else if (starWarsObj instanceof Planets) {
-            preparedStatement = getInsertIntoPreparedStatement((Planets) starWarsObj, conn);
+            return getInsertIntoPlanetsTablePreparedStatement((Planets) starWarsObj, conn);
         } else if (starWarsObj instanceof Species) {
-            preparedStatement = getInsertIntoPreparedStatement((Species) starWarsObj, conn);
+            return getInsertIntoSpeciesTablePreparedStatement((Species) starWarsObj, conn);
         } else if (starWarsObj instanceof Starships) {
-            preparedStatement = getInsertIntoPreparedStatement((Starships) starWarsObj, conn);
+            return getInsertIntoStarshipsTablePreparedStatement((Starships) starWarsObj, conn);
         } else if (starWarsObj instanceof Vehicles) {
-            preparedStatement = getInsertIntoPreparedStatement((Vehicles) starWarsObj, conn);
+            return getInsertIntoVehiclesTablePreparedStatement((Vehicles) starWarsObj, conn);
         } else throw new SQLException("Invalid Object");
-        return preparedStatement;
     }
 
-    public static PreparedStatement getInsertIntoPeopleFilmsPreparedStatement(People people, Films film, Connection conn) throws SQLException {
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_films(peopleid, filmsid) VALUES (?,?)");
-        preparedStatement.setInt(1, people.getPeopleid());
-        preparedStatement.setInt(2, film.getFilmsid());
-        return preparedStatement;
+    private static PreparedStatement getInsertIntoPreparedStatement(StarWarsObj starWarsObj0, StarWarsObj starWarsObj1, Connection conn) throws SQLException {
+        if (starWarsObj0 instanceof People && starWarsObj1 instanceof Films) {
+            return getInsertIntoPeopleFilmsTablePreparedStatement((People) starWarsObj0, (Films) starWarsObj1, conn);
+        } else if (starWarsObj0 instanceof People && starWarsObj1 instanceof Planets) {
+                return getInsertIntoPeoplePlanetsTablePreparedStatement((People) starWarsObj0, (Planets) starWarsObj1, conn);
+        } else if (starWarsObj0 instanceof People && starWarsObj1 instanceof Species) {
+                return getInsertIntoPeopleSpeciesTablePreparedStatement((People) starWarsObj0, (Species) starWarsObj1, conn);
+        } else if (starWarsObj0 instanceof People && starWarsObj1 instanceof Starships) {
+                return getInsertIntoPeopleStarshipsTablePreparedStatement((People) starWarsObj0, (Starships) starWarsObj1, conn);
+        } else if (starWarsObj0 instanceof People && starWarsObj1 instanceof Vehicles) {
+                return getInsertIntoPeopleVehiclesTablePreparedStatement((People) starWarsObj0, (Vehicles) starWarsObj1, conn);
+
+        } else if (starWarsObj0 instanceof Films && starWarsObj1 instanceof People) {
+                return getInsertIntoPeopleFilmsTablePreparedStatement((People) starWarsObj1, (Films) starWarsObj0, conn);
+        } else if (starWarsObj0 instanceof Films && starWarsObj1 instanceof Planets) {
+                return getInsertIntoFilmsPlanetsTablePreparedStatement((Films) starWarsObj0, (Planets) starWarsObj1, conn);
+        } else if (starWarsObj0 instanceof Films && starWarsObj1 instanceof Species) {
+                return getInsertIntoFilmsSpeciesTablePreparedStatement((Films) starWarsObj0, (Species) starWarsObj1, conn);
+        } else if (starWarsObj0 instanceof Films && starWarsObj1 instanceof Starships) {
+                return getInsertIntoFilmsStarshipsTablePreparedStatement((Films) starWarsObj0, (Starships) starWarsObj1, conn);
+        } else if (starWarsObj0 instanceof Films && starWarsObj1 instanceof Vehicles) {
+                return getInsertIntoFilmsVehiclesTablePreparedStatement((Films) starWarsObj0, (Vehicles) starWarsObj1, conn);
+
+        } else if (starWarsObj0 instanceof Planets && starWarsObj1 instanceof People) {
+                return getInsertIntoPeoplePlanetsTablePreparedStatement((People) starWarsObj1, (Planets) starWarsObj0, conn);
+        } else if (starWarsObj0 instanceof Planets && starWarsObj1 instanceof Films) {
+                return getInsertIntoFilmsPlanetsTablePreparedStatement((Films) starWarsObj1, (Planets) starWarsObj0, conn);
+
+        } else if (starWarsObj0 instanceof Species && starWarsObj1 instanceof People) {
+                return getInsertIntoPeopleSpeciesTablePreparedStatement((People) starWarsObj1, (Species) starWarsObj0, conn);
+        } else if (starWarsObj0 instanceof Species && starWarsObj1 instanceof Films) {
+                return getInsertIntoFilmsSpeciesTablePreparedStatement((Films) starWarsObj1, (Species) starWarsObj0, conn);
+
+        } else if (starWarsObj0 instanceof Starships && starWarsObj1 instanceof People) {
+                return getInsertIntoPeopleStarshipsTablePreparedStatement((People) starWarsObj1, (Starships) starWarsObj0, conn);
+        } else if (starWarsObj0 instanceof Starships && starWarsObj1 instanceof Films) {
+                return getInsertIntoFilmsStarshipsTablePreparedStatement((Films) starWarsObj1, (Starships) starWarsObj0, conn);
+
+        } else if (starWarsObj0 instanceof Vehicles && starWarsObj1 instanceof People) {
+                return getInsertIntoPeopleVehiclesTablePreparedStatement((People) starWarsObj1, (Vehicles) starWarsObj0, conn);
+        } else if (starWarsObj0 instanceof Vehicles && starWarsObj1 instanceof Films) {
+                return getInsertIntoFilmsVehiclesTablePreparedStatement((Films) starWarsObj1, (Vehicles) starWarsObj0, conn);
+                
+        } else throw new SQLException("Invalid Object");
     }
 
-    public static PreparedStatement getInsertIntoPeoplePlanetsPreparedStatement(People people, Planets planet, Connection conn) throws SQLException {
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_planets(peopleid, planetsid) VALUES (?,?)");
-        preparedStatement.setInt(1, people.getPeopleid());
-        preparedStatement.setInt(2, planet.getPlanetsid());
-        return preparedStatement;
-    }
-
-    public static PreparedStatement getInsertIntoPeopleSpeciesPreparedStatement(People people, Species species, Connection conn) throws SQLException {
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_species(peopleid, speciesid) VALUES (?,?)");
-        preparedStatement.setInt(1, people.getPeopleid());
-        preparedStatement.setInt(2, species.getSpeciesid());
-        return preparedStatement;
-    }
-
-    public static PreparedStatement getInsertIntoPeopleStarshipsPreparedStatement(People people, Starships starship, Connection conn) throws SQLException {
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_starships(peopleid, starshipsid) VALUES (?,?)");
-        preparedStatement.setInt(1, people.getPeopleid());
-        preparedStatement.setInt(2, starship.getStarshipsid());
-        return preparedStatement;
-    }
-
-    public static PreparedStatement getInsertIntoPeopleVehiclesPreparedStatement(People people, Vehicles vehicle, Connection conn) throws SQLException {
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_vehicles(peopleid, vehiclesid) VALUES (?,?)");
-        preparedStatement.setInt(1, people.getPeopleid());
-        preparedStatement.setInt(2, vehicle.getVehiclesid());
-        return preparedStatement;
-    }
-
-    public static PreparedStatement getInsertIntoFilmsPlanetsPreparedStatement(Films film, Planets planet, Connection conn) throws SQLException {
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO films_planets(filmsid, planetsid) VALUES (?,?)");
-        preparedStatement.setInt(1, film.getFilmsid());
-        preparedStatement.setInt(2, planet.getPlanetsid());
-        return preparedStatement;
-    }
-
-    public static PreparedStatement getInsertIntoFilmsSpeciesPreparedStatement(Films film, Species species, Connection conn) throws SQLException {
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO films_species(filmsid, speciesid) VALUES (?,?)");
-        preparedStatement.setInt(1, film.getFilmsid());
-        preparedStatement.setInt(2, species.getSpeciesid());
-        return preparedStatement;
-    }
-
-    public static PreparedStatement getInsertIntoFilmsStarshipsPreparedStatement(Films film, Starships starship, Connection conn) throws SQLException {
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO films_starships(filmsid, starshipsid) VALUES (?,?)");
-        preparedStatement.setInt(1, film.getFilmsid());
-        preparedStatement.setInt(2, starship.getStarshipsid());
-        return preparedStatement;
-    }
-
-    public static PreparedStatement getInsertIntoFilmsVehiclesPreparedStatement(Films film, Vehicles vehicle, Connection conn) throws SQLException {
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO films_vehicles(filmsid, vehiclesid) VALUES (?,?)");
-        preparedStatement.setInt(1, film.getFilmsid());
-        preparedStatement.setInt(2, vehicle.getVehiclesid());
-        return preparedStatement;
-    }
-
-    public static PreparedStatement getInsertIntoPreparedStatement(People people, Connection conn) throws SQLException {
+    public static PreparedStatement getInsertIntoPeopleTablePreparedStatement(People people, Connection conn) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people(peopleid, name, height, mass, hair_color, skin_color, eye_color, birth_year, gender, created, edited, url) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
         preparedStatement.setInt(1, people.getPeopleid());
         preparedStatement.setString(2, people.getName());
@@ -168,7 +100,7 @@ public class InsertStatements {
         return preparedStatement;
     }
 
-    public static PreparedStatement getInsertIntoPreparedStatement(Films film, Connection conn) throws SQLException {
+    public static PreparedStatement getInsertIntoFilmsTablePreparedStatement(Films film, Connection conn) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO films (filmsid, title, episode_id, opening_crawl, director, producer, release_date, created, edited, url) VALUES (?,?,?,?,?,?,?,?,?,?)");
         preparedStatement.setInt(1, film.getFilmsid());
         preparedStatement.setString(2, film.getTitle());
@@ -183,7 +115,7 @@ public class InsertStatements {
         return preparedStatement;
     }
 
-    public static PreparedStatement getInsertIntoPreparedStatement(Planets planet, Connection conn) throws SQLException {
+    public static PreparedStatement getInsertIntoPlanetsTablePreparedStatement(Planets planet, Connection conn) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO planets (planetsid, name, rotation_period, orbital_period, diameter, climate, gravity, terrain, surface_water, population, created, edited, url) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
         preparedStatement.setInt(1, planet.getPlanetsid());
         preparedStatement.setString(2, planet.getName());
@@ -201,7 +133,7 @@ public class InsertStatements {
         return preparedStatement;
     }
 
-    public static PreparedStatement getInsertIntoPreparedStatement(Species species, Connection conn) throws SQLException {
+    public static PreparedStatement getInsertIntoSpeciesTablePreparedStatement(Species species, Connection conn) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO species(speciesid, name, classification, designation, average_height, skin_colors, hair_colors, eye_colors, average_lifespan, homeworld, language, created, edited, url) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         preparedStatement.setInt(1, species.getSpeciesid());
         preparedStatement.setString(2, species.getName());
@@ -220,7 +152,7 @@ public class InsertStatements {
         return preparedStatement;
     }
 
-    public static PreparedStatement getInsertIntoPreparedStatement(Starships starship, Connection conn) throws SQLException {
+    public static PreparedStatement getInsertIntoStarshipsTablePreparedStatement(Starships starship, Connection conn) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO starships (starshipsid, name, model, manufacturer, cost_in_credits, length, max_atmosphering_speed, crew, passengers, cargo_capacity, consumables, hyperdrive_rating, MGLT, starship_class, created, edited, url) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         preparedStatement.setInt(1, starship.getStarshipsid());
         preparedStatement.setString(2, starship.getName());
@@ -242,7 +174,7 @@ public class InsertStatements {
         return preparedStatement;
     }
 
-    public static PreparedStatement getInsertIntoPreparedStatement(Vehicles vehicle, Connection conn) throws SQLException {
+    public static PreparedStatement getInsertIntoVehiclesTablePreparedStatement(Vehicles vehicle, Connection conn) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO vehicles (vehiclesid, name, model, manufacturer, cost_in_credits, length, max_atmosphering_speed, crew, passengers, cargo_capacity, consumables, vehicle_class, created, edited, url) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         preparedStatement.setInt(1, vehicle.getVehiclesid());
         preparedStatement.setString(2, vehicle.getName());
@@ -261,6 +193,71 @@ public class InsertStatements {
         preparedStatement.setString(15, String.valueOf(vehicle.getUrl()));
         return preparedStatement;
     }
+
+    public static PreparedStatement getInsertIntoPeopleFilmsTablePreparedStatement(People people, Films film, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_films(peopleid, filmsid) VALUES (?,?)");
+        preparedStatement.setInt(1, people.getPeopleid());
+        preparedStatement.setInt(2, film.getFilmsid());
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoPeoplePlanetsTablePreparedStatement(People people, Planets planet, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_planets(peopleid, planetsid) VALUES (?,?)");
+        preparedStatement.setInt(1, people.getPeopleid());
+        preparedStatement.setInt(2, planet.getPlanetsid());
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoPeopleSpeciesTablePreparedStatement(People people, Species species, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_species(peopleid, speciesid) VALUES (?,?)");
+        preparedStatement.setInt(1, people.getPeopleid());
+        preparedStatement.setInt(2, species.getSpeciesid());
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoPeopleStarshipsTablePreparedStatement(People people, Starships starship, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_starships(peopleid, starshipsid) VALUES (?,?)");
+        preparedStatement.setInt(1, people.getPeopleid());
+        preparedStatement.setInt(2, starship.getStarshipsid());
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoPeopleVehiclesTablePreparedStatement(People people, Vehicles vehicle, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_vehicles(peopleid, vehiclesid) VALUES (?,?)");
+        preparedStatement.setInt(1, people.getPeopleid());
+        preparedStatement.setInt(2, vehicle.getVehiclesid());
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoFilmsPlanetsTablePreparedStatement(Films film, Planets planet, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO films_planets(filmsid, planetsid) VALUES (?,?)");
+        preparedStatement.setInt(1, film.getFilmsid());
+        preparedStatement.setInt(2, planet.getPlanetsid());
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoFilmsSpeciesTablePreparedStatement(Films film, Species species, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO films_species(filmsid, speciesid) VALUES (?,?)");
+        preparedStatement.setInt(1, film.getFilmsid());
+        preparedStatement.setInt(2, species.getSpeciesid());
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoFilmsStarshipsTablePreparedStatement(Films film, Starships starship, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO films_starships(filmsid, starshipsid) VALUES (?,?)");
+        preparedStatement.setInt(1, film.getFilmsid());
+        preparedStatement.setInt(2, starship.getStarshipsid());
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoFilmsVehiclesTablePreparedStatement(Films film, Vehicles vehicle, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO films_vehicles(filmsid, vehiclesid) VALUES (?,?)");
+        preparedStatement.setInt(1, film.getFilmsid());
+        preparedStatement.setInt(2, vehicle.getVehiclesid());
+        return preparedStatement;
+    }
+
+
 
 
 //    public static PreparedStatement getInsertIntoPeopleFilmsPreparedStatement(int peopleid, int filmsid, Connection conn) throws SQLException {

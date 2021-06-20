@@ -6,8 +6,6 @@ import org.tony.script.model.*;
 import java.net.URL;
 import java.sql.*;
 
-import static org.tony.db.InsertStatements.*;
-
 public class InsertStatements {
 
     protected static void insertIntoStarWarsApiDb(StarWarsObj starWarsObj) throws SQLException, ClassNotFoundException {
@@ -318,6 +316,68 @@ public class InsertStatements {
         preparedStatement.setString(13, vehicle.getCreated());
         preparedStatement.setString(14, vehicle.getEdited());
         preparedStatement.setString(15, String.valueOf(vehicle.getUrl()));
+        return preparedStatement;
+    }
+        public static PreparedStatement getInsertIntoPeopleFilmsPreparedStatement(int peopleid, int filmsid, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_films(peopleid, filmsid) VALUES (?,?)");
+        preparedStatement.setInt(1, peopleid);
+        preparedStatement.setInt(2, filmsid);
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoPeoplePlanetsPreparedStatement(int peopleid, int planetsid, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_planets(peopleid, planetsid) VALUES (?,?)");
+        preparedStatement.setInt(1, peopleid);
+        preparedStatement.setInt(2, planetsid);
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoPeopleSpeciesPreparedStatement(int peopleid, int speciesid, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_species(peopleid, speciesid) VALUES (?,?)");
+        preparedStatement.setInt(1, peopleid);
+        preparedStatement.setInt(2, speciesid);
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoPeopleStarshipsPreparedStatement(int peopleid, int starshipsid, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_starships(peopleid, starshipsid) VALUES (?,?)");
+        preparedStatement.setInt(1, peopleid);
+        preparedStatement.setInt(2, starshipsid);
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoPeopleVehiclesPreparedStatement(int peopleid, int vehiclesid, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO people_vehicles(peopleid, vehiclesid) VALUES (?,?)");
+        preparedStatement.setInt(1, peopleid);
+        preparedStatement.setInt(2, vehiclesid);
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoFilmsPlanetsPreparedStatement(int filmsid, int planetsid, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO films_planets(filmsid, planetsid) VALUES (?,?)");
+        preparedStatement.setInt(1, filmsid);
+        preparedStatement.setInt(2, planetsid);
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoFilmsSpeciesPreparedStatement(int filmsid, int speciesid, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO films_species(filmsid, speciesid) VALUES (?,?)");
+        preparedStatement.setInt(1, filmsid);
+        preparedStatement.setInt(2, speciesid);
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoFilmsStarshipsPreparedStatement(int filmsid, int starshipsid, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO films_starships(filmsid, starshipsid) VALUES (?,?)");
+        preparedStatement.setInt(1, filmsid);
+        preparedStatement.setInt(2, starshipsid);
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoFilmsVehiclesPreparedStatement(int filmsid, int vehiclesid, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO films_vehicles(filmsid, vehiclesid) VALUES (?,?)");
+        preparedStatement.setInt(1, filmsid);
+        preparedStatement.setInt(2, vehiclesid);
         return preparedStatement;
     }
 }
