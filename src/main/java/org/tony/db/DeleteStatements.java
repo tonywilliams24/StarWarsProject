@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class deleteStatements {
+public class DeleteStatements {
     
     public static void deleteFromStarWarsApiDb(StarWarsObj starWarsObj) throws SQLException, ClassNotFoundException {
         Connection conn = DbConnection.createDbConnection();
