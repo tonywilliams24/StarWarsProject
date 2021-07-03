@@ -1,6 +1,9 @@
 package org.tony.model;
 
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Films extends StarWarsObj {
@@ -22,6 +25,19 @@ public class Films extends StarWarsObj {
     private static String path = "https://swapi.dev/api/films/";
 
     public Films() {
+    }
+
+    public  Films(ResultSet rs) throws SQLException, MalformedURLException {
+        this.setFilmsid(rs.getInt("filmsid"));
+        this.setTitle(rs.getString("title"));
+        this.setEpisode_id(rs.getInt("episode_id"));
+        this.setOpening_crawl(rs.getString("opening_crawl"));
+        this.setDirector(rs.getString("director"));
+        this.setProducer(rs.getString("producer"));
+        this.setRelease_date(rs.getString("release_date"));
+        this.setCreated(rs.getString("created"));
+        this.setEdited(rs.getString("edited"));
+        this.setUrl(new URL(rs.getString("url")));
     }
 
     public String getTitle() {

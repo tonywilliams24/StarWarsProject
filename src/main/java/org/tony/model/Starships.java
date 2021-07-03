@@ -2,7 +2,10 @@ package org.tony.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Starships extends StarWarsObj {
@@ -27,6 +30,26 @@ public class Starships extends StarWarsObj {
     private URL url;
 
     public Starships() {
+    }
+
+    public Starships(ResultSet rs) throws SQLException, MalformedURLException {
+        this.setStarshipsid(rs.getInt("starshipsid"));
+        this.setName(rs.getString("name"));
+        this.setModel(rs.getString("model"));
+        this.setManufacturer(rs.getString("manufacturer"));
+        this.setCost_in_credits(rs.getString("cost_in_credits"));
+        this.setLength(rs.getString("length"));
+        this.setMax_atmosphering_speed(rs.getString("max_atmosphering_speed"));
+        this.setCrew(rs.getString("crew"));
+        this.setPassengers(rs.getString("passengers"));
+        this.setCargo_capacity(rs.getString("cargo_capacity"));
+        this.setConsumables(rs.getString("consumables"));
+        this.setHyperdrive_rating(rs.getString("hyperdrive_rating"));
+        this.setMGLT(rs.getString("mglt"));
+        this.setStarship_class(rs.getString("starship_class"));
+        this.setCreated(rs.getString("created"));
+        this.setEdited(rs.getString("edited"));
+        this.setUrl(new URL(rs.getString("url")));
     }
 
     public String getMGLT() {

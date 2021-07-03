@@ -5,8 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.tony.repository.Repository;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.sql.SQLException;
 
 /**
  * JavaFX App
@@ -31,7 +34,13 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MalformedURLException, SQLException, ClassNotFoundException {
+        Repository.retrieveAllPeopleFromDb();
+        Repository.retrieveAllFilmsFromDb();
+        Repository.retrieveAllSpeciesFromDb();
+        Repository.retrieveAllPlanetsFromDb();
+        Repository.retrieveAllStarshipsFromDb();
+        Repository.retrieveAllVehiclesFromDb();
         launch();
     }
 

@@ -1,10 +1,15 @@
 package org.tony.model;
 
+import org.tony.db.SelectStatements;
+
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class People extends StarWarsObj {
-    private int peopleid;
+    private int thisid;
     private String name;
     private String height;
     private String mass;
@@ -25,12 +30,27 @@ public class People extends StarWarsObj {
     public People() {
     }
 
-    public int getPeopleid() {
-        return peopleid;
+    public People(ResultSet rs) throws SQLException, MalformedURLException {
+        this.setPeopleid(rs.getInt("peopleid"));
+        this.setName(rs.getString("name"));
+        this.setHeight(rs.getString("height"));
+        this.setMass(rs.getString("mass"));
+        this.setHair_color(rs.getString("hair_color"));
+        this.setSkin_color(rs.getString("skin_color"));
+        this.setEye_color(rs.getString("eye_color"));
+        this.setBirth_year(rs.getString("birth_year"));
+        this.setGender(rs.getString("gender"));
+        this.setCreated(rs.getString("created"));
+        this.setEdited(rs.getString("edited"));
+        this.setUrl(new URL(rs.getString("url")));
     }
 
-    public void setPeopleid(int peopleid) {
-        this.peopleid = peopleid;
+    public int getPeopleid() {
+        return thisid;
+    }
+
+    public void setPeopleid(int thisid) {
+        this.thisid = thisid;
     }
 
     public String getName() {
@@ -164,7 +184,7 @@ public class People extends StarWarsObj {
     @Override
     public String toString() {
         return "People{" +
-                "peopleid=" + peopleid +
+                "thisid=" + thisid +
                 ", name='" + name + '\'' +
                 ", height=" + height +
                 ", mass=" + mass +

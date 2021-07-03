@@ -81,7 +81,7 @@ public class UpdateStatements {
     }
 
     public static PreparedStatement getUpdateSpeciesTablePreparedStatement(Species species, Connection conn) throws SQLException {
-        PreparedStatement preparedStatement = conn.prepareStatement("UPDATE species SET name=?, classification=?, designation=?, average_height=?, skin_colors=?, hair_colors=?, eye_colors=?, average_lifespan=?, homeworld=?, language=?, created=?, edited=?, url=? WHERE speciesid=?");
+        PreparedStatement preparedStatement = conn.prepareStatement("UPDATE species SET name=?, classification=?, designation=?, average_height=?, skin_colors=?, hair_colors=?, eye_colors=?, average_lifespan=?, language=?, created=?, edited=?, url=? WHERE speciesid=?");
         preparedStatement.setString(1, species.getName());
         preparedStatement.setString(2, species.getClassification());
         preparedStatement.setString(3, species.getDesignation());
@@ -90,12 +90,11 @@ public class UpdateStatements {
         preparedStatement.setString(6, species.getHair_colors());
         preparedStatement.setString(7, species.getEye_colors());
         preparedStatement.setString(8, species.getAverage_lifespan());
-        preparedStatement.setString(9, species.getHomeworld());
-        preparedStatement.setString(10, species.getLanguage());
-        preparedStatement.setString(11, species.getCreated());
-        preparedStatement.setString(12, species.getEdited());
-        preparedStatement.setString(13, String.valueOf(species.getUrl()));
-        preparedStatement.setInt(14, species.getSpeciesid());
+        preparedStatement.setString(9, species.getLanguage());
+        preparedStatement.setString(10, species.getCreated());
+        preparedStatement.setString(11, species.getEdited());
+        preparedStatement.setString(12, String.valueOf(species.getUrl()));
+        preparedStatement.setInt(13, species.getSpeciesid());
         return preparedStatement;
     }
 

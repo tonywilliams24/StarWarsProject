@@ -1,6 +1,9 @@
 package org.tony.model;
 
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Vehicles extends StarWarsObj {
@@ -23,6 +26,24 @@ public class Vehicles extends StarWarsObj {
     private URL url;
 
     public Vehicles() {
+    }
+
+    public Vehicles(ResultSet rs) throws SQLException, MalformedURLException {
+        this.setVehiclesid(rs.getInt("vehiclesid"));
+        this.setName(rs.getString("name"));
+        this.setModel(rs.getString("model"));
+        this.setManufacturer(rs.getString("manufacturer"));
+        this.setCost_in_credits(rs.getString("cost_in_credits"));
+        this.setLength(rs.getString("length"));
+        this.setMax_atmosphering_speed(rs.getString("max_atmosphering_speed"));
+        this.setCrew(rs.getString("crew"));
+        this.setPassengers(rs.getString("passengers"));
+        this.setCargo_capacity(rs.getString("cargo_capacity"));
+        this.setConsumables(rs.getString("consumables"));
+        this.setVehicle_class(rs.getString("vehicle_class"));
+        this.setCreated(rs.getString("created"));
+        this.setEdited(rs.getString("edited"));
+        this.setUrl(new URL(rs.getString("url")));
     }
 
     public void setCost_in_credits(String cost_in_credits) {

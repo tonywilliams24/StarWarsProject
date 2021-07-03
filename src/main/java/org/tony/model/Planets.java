@@ -1,6 +1,9 @@
 package org.tony.model;
 
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Planets extends StarWarsObj {
@@ -23,8 +26,20 @@ public class Planets extends StarWarsObj {
     public Planets() {
     }
 
-    public Planets(String climate) {
-        this.climate = climate;
+    public Planets(ResultSet rs) throws SQLException, MalformedURLException {
+        this.setPlanetsid(rs.getInt("planetsid"));
+        this.setName(rs.getString("name"));
+        this.setRotation_period(rs.getString("rotation_period"));
+        this.setOrbital_period(rs.getString("orbital_period"));
+        this.setDiameter(rs.getString("diameter"));
+        this.setClimate(rs.getString("climate"));
+        this.setGravity(rs.getString("gravity"));
+        this.setTerrain(rs.getString("terrain"));
+        this.setSurface_water(rs.getString("surface_water"));
+        this.setPopulation(rs.getString("population"));
+        this.setCreated(rs.getString("created"));
+        this.setEdited(rs.getString("edited"));
+        this.setUrl(new URL(rs.getString("url")));
     }
 
     public int getPlanetsid() {

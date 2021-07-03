@@ -134,7 +134,7 @@ public class InsertStatements {
     }
 
     public static PreparedStatement getInsertIntoSpeciesTablePreparedStatement(Species species, Connection conn) throws SQLException {
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO species(speciesid, name, classification, designation, average_height, skin_colors, hair_colors, eye_colors, average_lifespan, homeworld, language, created, edited, url) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO species(speciesid, name, classification, designation, average_height, skin_colors, hair_colors, eye_colors, average_lifespan, language, created, edited, url) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
         preparedStatement.setInt(1, species.getSpeciesid());
         preparedStatement.setString(2, species.getName());
         preparedStatement.setString(3, species.getClassification());
@@ -144,11 +144,10 @@ public class InsertStatements {
         preparedStatement.setString(7, species.getHair_colors());
         preparedStatement.setString(8, species.getEye_colors());
         preparedStatement.setString(9, species.getAverage_lifespan());
-        preparedStatement.setString(10, species.getHomeworld());
-        preparedStatement.setString(11, species.getLanguage());
-        preparedStatement.setString(12, species.getCreated());
-        preparedStatement.setString(13, species.getEdited());
-        preparedStatement.setString(14, String.valueOf(species.getUrl()));
+        preparedStatement.setString(10, species.getLanguage());
+        preparedStatement.setString(11, species.getCreated());
+        preparedStatement.setString(12, species.getEdited());
+        preparedStatement.setString(13, String.valueOf(species.getUrl()));
         return preparedStatement;
     }
 

@@ -1,6 +1,9 @@
 package org.tony.model;
 
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Species extends StarWarsObj {
@@ -13,7 +16,6 @@ public class Species extends StarWarsObj {
     private String hair_colors;
     private String eye_colors;
     private String average_lifespan;
-    private String homeworld;
     private String language;
     private List<People> people;
     private List<Films> films;
@@ -22,6 +24,22 @@ public class Species extends StarWarsObj {
     private URL url;
 
     public Species() {
+    }
+    
+    public Species(ResultSet rs) throws SQLException, MalformedURLException {
+        this.setSpeciesid(rs.getInt("speciesid"));
+        this.setName(rs.getString("name"));
+        this.setClassification(rs.getString("classification"));
+        this.setDesignation(rs.getString("designation"));
+        this.setAverage_height(rs.getString("average_height"));
+        this.setSkin_colors(rs.getString("skin_colors"));
+        this.setHair_colors(rs.getString("hair_colors"));
+        this.setEye_colors(rs.getString("eye_colors"));
+        this.setAverage_lifespan(rs.getString("average_lifespan"));
+        this.setLanguage(rs.getString("language"));
+        this.setCreated(rs.getString("created"));
+        this.setEdited(rs.getString("edited"));
+        this.setUrl(new URL(rs.getString("url")));
     }
 
     public String getClassification() {
@@ -96,14 +114,6 @@ public class Species extends StarWarsObj {
         this.average_lifespan = average_lifespan;
     }
 
-    public String getHomeworld() {
-        return homeworld;
-    }
-
-    public void setHomeworld(String homeworld) {
-        this.homeworld = homeworld;
-    }
-
     public String getLanguage() {
         return language;
     }
@@ -163,7 +173,6 @@ public class Species extends StarWarsObj {
                 ", hair_colors='" + hair_colors + '\'' +
                 ", eye_colors='" + eye_colors + '\'' +
                 ", average_lifespan=" + average_lifespan +
-                ", homeworld='" + homeworld + '\'' +
                 ", language='" + language + '\'' +
                 ", created='" + created + '\'' +
                 ", edited='" + edited + '\'' +
