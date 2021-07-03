@@ -19,64 +19,63 @@ public class Repository {
     public static List<Vehicles> allVehicles = new ArrayList<>();
 
     public static void retrieveAllPeopleFromDb() throws SQLException, ClassNotFoundException, MalformedURLException {
-    
+        if(allPeople.isEmpty()) {
             ResultSet peopleSet = getAllPeople();
             while (peopleSet.next()) {
                 People people = new People(peopleSet);
                 allPeople.add(people);
             }
-        
+        }
     }
 
     public static void retrieveAllFilmsFromDb() throws SQLException, ClassNotFoundException, MalformedURLException {
-    
+        if(allFilms.isEmpty()) {
             ResultSet filmsSet = selectAllFilms();
             while (filmsSet.next()) {
                 Films film = new Films(filmsSet);
                 allFilms.add(film);
             }
-        
+        }
     }
 
     public static void retrieveAllPlanetsFromDb() throws SQLException, ClassNotFoundException, MalformedURLException {
-    
+        if(allPlanets.isEmpty()) {
             ResultSet planetsSet = selectAllPlanets();
             while (planetsSet.next()) {
                 Planets planet = new Planets(planetsSet);
                 allPlanets.add(planet);
             }
-        
+        }
     }
 
     public static void retrieveAllSpeciesFromDb() throws SQLException, ClassNotFoundException, MalformedURLException {
-    
+        if(allSpecies.isEmpty()) {
             ResultSet speciesSet = selectAllSpecies();
             while (speciesSet.next()) {
                 Species species = new Species(speciesSet);
                 allSpecies.add(species);
             }
-        
+        }
     }
 
     public static void retrieveAllStarshipsFromDb() throws SQLException, ClassNotFoundException, MalformedURLException {
-    
+        if (allStarships.isEmpty()) {
             ResultSet StarshipsSet = selectAllStarships();
             while (StarshipsSet.next()) {
                 Starships starship = new Starships(StarshipsSet);
                 allStarships.add(starship);
             }
-        
+        }
     }
 
-    public static void retrieveAllVehiclesFromDb() throws SQLException, ClassNotFoundException, MalformedURLException {
-    
-            ResultSet vehiclesSet = selectAllVehicles();
-            while (vehiclesSet.next()) {
-                Vehicles vehicle = new Vehicles(vehiclesSet);
-                allVehicles.add(vehicle);
+        public static void retrieveAllVehiclesFromDb() throws SQLException, ClassNotFoundException, MalformedURLException {
+            if (allVehicles.isEmpty()) {
+                ResultSet vehiclesSet = selectAllVehicles();
+                while (vehiclesSet.next()) {
+                    Vehicles vehicle = new Vehicles(vehiclesSet);
+                    allVehicles.add(vehicle);
+                }
             }
-        
+        }
     }
-    
-    
-}
+

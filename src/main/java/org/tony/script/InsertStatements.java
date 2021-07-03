@@ -36,7 +36,8 @@ public class InsertStatements {
 
     protected static void insertIntoPeoplePlanetsTable(People people) throws SQLException, ClassNotFoundException {
         int peopleid = people.getPeopleid();
-        int planetsid = StarWarsObj.extractIdFromUrl(people.getHomeworld());
+        URL homeworldURL = people.getHomeworld();
+        int planetsid = StarWarsObj.extractIdFromUrl(homeworldURL);
         Connection conn = DbConnection.createDbConnection();
         PreparedStatement preparedStatement = getInsertIntoPeoplePlanetsPreparedStatement(peopleid, planetsid, conn);
         preparedStatement.executeUpdate();
@@ -128,6 +129,29 @@ public class InsertStatements {
             int filmsid = StarWarsObj.extractIdFromUrl(filmsUrl);
             Connection conn = DbConnection.createDbConnection();
             PreparedStatement preparedStatement = getInsertIntoFilmsPlanetsPreparedStatement(filmsid, planetsid, conn);
+            preparedStatement.executeUpdate();
+        }
+    }
+
+    protected static void insertIntoSpeciesPlanetsTable(Species species) throws SQLException, ClassNotFoundException {
+        int speciesid = species.getSpeciesid();
+        URL homeworldURL = species.getHomeworld();
+        System.out.println(speciesid);
+        System.out.println(homeworldURL);
+        if(homeworldURL!=null) {
+            int planetsid = StarWarsObj.extractIdFromUrl(homeworldURL);
+            Connection conn = DbConnection.createDbConnection();
+            PreparedStatement preparedStatement = getInsertIntoSpeciesPlanetsPreparedStatement(speciesid, planetsid, conn);
+            preparedStatement.executeUpdate();
+        }
+    }
+
+    protected static void insertIntoSpeciesPlanetsTable(Planets planet) throws SQLException, ClassNotFoundException {
+        int planetsid = planet.getPlanetsid();
+        for (URL speciesUrl : planet.getResidents()) {
+            int speciesid = StarWarsObj.extractIdFromUrl(speciesUrl);
+            Connection conn = DbConnection.createDbConnection();
+            PreparedStatement preparedStatement = getInsertIntoSpeciesPlanetsPreparedStatement(speciesid, planetsid, conn);
             preparedStatement.executeUpdate();
         }
     }
@@ -356,6 +380,13 @@ public class InsertStatements {
     public static PreparedStatement getInsertIntoFilmsPlanetsPreparedStatement(int filmsid, int planetsid, Connection conn) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO films_planets(filmsid, planetsid) VALUES (?,?)");
         preparedStatement.setInt(1, filmsid);
+        preparedStatement.setInt(2, planetsid);
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoSpeciesPlanetsPreparedStatement(int speciesid, int planetsid, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO species_planets(speciesid, planetsid) VALUES (?,?)");
+        preparedStatement.setInt(1, speciesid);
         preparedStatement.setInt(2, planetsid);
         return preparedStatement;
     }

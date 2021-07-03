@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.tony.repository.Repository;
+import org.tony.script.SwapiJsonInsertScript;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -34,7 +35,8 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args) throws MalformedURLException, SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
+        SwapiJsonInsertScript.runScript();
         Repository.retrieveAllPeopleFromDb();
         Repository.retrieveAllFilmsFromDb();
         Repository.retrieveAllSpeciesFromDb();

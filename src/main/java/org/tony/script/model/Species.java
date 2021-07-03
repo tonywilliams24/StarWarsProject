@@ -13,7 +13,7 @@ public class Species extends StarWarsObj {
     private String hair_colors;
     private String eye_colors;
     private String average_lifespan;
-    private String homeworld;
+    private URL homeworld;
     private String language;
     private List<URL> people;
     private List<URL> films;
@@ -96,11 +96,11 @@ public class Species extends StarWarsObj {
         this.average_lifespan = average_lifespan;
     }
 
-    public String getHomeworld() {
+    public URL getHomeworld() {
         return homeworld;
     }
 
-    public void setHomeworld(String homeworld) {
+    public void setHomeworld(URL homeworld) {
         this.homeworld = homeworld;
     }
 

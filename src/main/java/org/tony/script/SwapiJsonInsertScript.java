@@ -152,6 +152,17 @@ public class SwapiJsonInsertScript {
                 }
             }
         }
+        
+        for (File file : SpeciesFilesArray) {
+            if (!file.getPath().equals(SpeciesDsStoreFile)) {
+                Species species = getSpeciesFromJson(file);
+                try {
+                    InsertStatements.insertIntoSpeciesPlanetsTable(species);
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+        }
 
     }
 
