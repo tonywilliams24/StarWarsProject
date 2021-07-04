@@ -1,10 +1,16 @@
 package org.tony.model;
 
+import org.tony.repository.Repository;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+
+import static org.tony.db.SelectStatements.*;
 
 public class Planets extends StarWarsObj {
     private int planetsid;
@@ -17,11 +23,9 @@ public class Planets extends StarWarsObj {
     private String terrain;
     private String surface_water;
     private String population;
-    private List<People> residents;
-    private List<Films> films;
-    private String created;
-    private String edited;
-    private URL url;
+    private HashSet<People> residents;
+    private HashSet<Films> films;
+    private HashSet<Species> species;
 
     public Planets() {
     }
@@ -122,43 +126,58 @@ public class Planets extends StarWarsObj {
         this.population = population;
     }
 
-    public List<People> getResidents() {
+    public HashSet<People> getResidents() {
         return residents;
     }
 
-    public void setResidents(List<People> residents) {
+    public void setResidents(HashSet<People> residents) {
         this.residents = residents;
     }
 
-    public List<Films> getFilms() {
+    public HashSet<Films> getFilms() {
         return films;
     }
 
-    public void setFilms(List<Films> films) {
+    public void setFilms(HashSet<Films> films) {
         this.films = films;
     }
 
-    public String getCreated() {
-        return created;
+    public HashSet<Species> getSpecies() {
+        return species;
     }
 
-    public void setCreated(String created) {
-        this.created = created;
+    public void setSpecies(HashSet<Species> species) {
+        this.species = species;
     }
 
-    public String getEdited() {
-        return edited;
+    public HashSet<Integer> getAssociatedPeopleIds(int planetsId) throws SQLException, ClassNotFoundException {
+        HashSet<Integer> peopleIdList = new HashSet<>();
+        ResultSet planetsPeopleSet = selectPlanetsFromPeoplePlanets(planetsId);
+        while(planetsPeopleSet.next()) {
+            int peopleId = planetsPeopleSet.getInt("peopleid");
+            peopleIdList.add(peopleId);
+        }
+        return peopleIdList;
     }
 
-    public void setEdited(String edited) {
-        this.edited = edited;
+    public HashSet<Integer> getAssociatedFilmIds(int planetsId) throws SQLException, ClassNotFoundException {
+        HashSet<Integer> filmsIdList = new HashSet<>();
+        ResultSet planetsFilmsSet = selectPlanetsFromFilmsPlanets(planetsId);
+        while(planetsFilmsSet.next()) {
+            int filmId = planetsFilmsSet.getInt("filmsid");
+            filmsIdList.add(filmId);
+        }
+        return filmsIdList;
     }
 
-    public URL getUrl() {
-        return url;
+    public HashSet<Integer> getAssociatedSpeciesIds(int planetsId) throws SQLException, ClassNotFoundException {
+        HashSet<Integer> speciesIdList = new HashSet<>();
+        ResultSet speciesPlanetsSet = selectPlanetsFromSpeciesPlanets(planetsId);
+        while(speciesPlanetsSet.next()) {
+            int speciesId = speciesPlanetsSet.getInt("speciesid");
+            speciesIdList.add(speciesId);
+        }
+        return speciesIdList;
     }
-
-    public void setUrl(URL url) {
-        this.url = url;
-    }
+    
 }

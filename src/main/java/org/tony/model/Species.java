@@ -1,10 +1,16 @@
 package org.tony.model;
 
+import org.tony.repository.Repository;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+
+import static org.tony.db.SelectStatements.*;
 
 public class Species extends StarWarsObj {
     private int speciesid;
@@ -17,11 +23,9 @@ public class Species extends StarWarsObj {
     private String eye_colors;
     private String average_lifespan;
     private String language;
-    private List<People> people;
-    private List<Films> films;
-    private String created;
-    private String edited;
-    private URL url;
+    private HashSet<People> people;
+    private HashSet<Films> films;
+    private HashSet<Planets> planets;
 
     public Species() {
     }
@@ -122,44 +126,58 @@ public class Species extends StarWarsObj {
         this.language = language;
     }
 
-    public List<People> getPeople() {
+    public HashSet<People> getPeople() {
         return people;
     }
 
-    public void setPeople(List<People> people) {
+    public void setPeople(HashSet<People> people) {
         this.people = people;
     }
 
-    public List<Films> getFilms() {
+    public HashSet<Films> getFilms() {
         return films;
     }
 
-    public void setFilms(List<Films> films) {
+    public void setFilms(HashSet<Films> films) {
         this.films = films;
     }
 
-    public String getCreated() {
-        return created;
+    public HashSet<Planets> getPlanets() {
+        return planets;
     }
 
-    public void setCreated(String created) {
-        this.created = created;
+    public void setPlanets(HashSet<Planets> planets) {
+        this.planets = planets;
     }
 
-    public String getEdited() {
-        return edited;
+    public HashSet<Integer> getAssociatedPeopleIds(int speciesId) throws SQLException, ClassNotFoundException {
+        HashSet<Integer> peopleIdList = new HashSet<>();
+        ResultSet speciesPeopleSet = selectSpeciesFromPeopleSpecies(speciesId);
+        while(speciesPeopleSet.next()) {
+            int peopleId = speciesPeopleSet.getInt("peopleid");
+            peopleIdList.add(peopleId);
+        }
+        return peopleIdList;
+    }
+    
+    public HashSet<Integer> getAssociatedFilmIds(int speciesId) throws SQLException, ClassNotFoundException {
+        HashSet<Integer> filmsIdList = new HashSet<>();
+        ResultSet speciesFilmsSet = selectSpeciesFromFilmsSpecies(speciesId);
+        while(speciesFilmsSet.next()) {
+            int filmId = speciesFilmsSet.getInt("filmsid");
+            filmsIdList.add(filmId);
+        }
+        return filmsIdList;
     }
 
-    public void setEdited(String edited) {
-        this.edited = edited;
-    }
-
-    public URL getUrl() {
-        return url;
-    }
-
-    public void setUrl(URL url) {
-        this.url = url;
+    public HashSet<Integer> getAssociatedPlanetIds(int speciesId) throws SQLException, ClassNotFoundException {
+        HashSet<Integer> planetsIdList = new HashSet<>();
+        ResultSet speciesPlanetsSet = selectSpeciesFromSpeciesPlanets(speciesId);
+        while(speciesPlanetsSet.next()) {
+            int planetId = speciesPlanetsSet.getInt("planetsid");
+            planetsIdList.add(planetId);
+        }
+        return planetsIdList;
     }
 
     @Override
@@ -174,9 +192,6 @@ public class Species extends StarWarsObj {
                 ", eye_colors='" + eye_colors + '\'' +
                 ", average_lifespan=" + average_lifespan +
                 ", language='" + language + '\'' +
-                ", created='" + created + '\'' +
-                ", edited='" + edited + '\'' +
-                ", url='" + url + '\'' +
                 '}';
     }
 }

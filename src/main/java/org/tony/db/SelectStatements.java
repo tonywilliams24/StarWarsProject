@@ -21,7 +21,7 @@ public class SelectStatements {
         return preparedStatement.executeQuery();
     }
 
-    public static ResultSet getAllPeople() throws SQLException, ClassNotFoundException {
+    public static ResultSet selectAllPeople() throws SQLException, ClassNotFoundException {
         Connection conn = DbConnection.createDbConnection();
         PreparedStatement preparedStatement = getSelectAllPeoplePreparedStatement(conn);
         return preparedStatement.executeQuery();

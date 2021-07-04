@@ -1,10 +1,16 @@
 package org.tony.model;
 
+import org.tony.repository.Repository;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+
+import static org.tony.db.SelectStatements.*;
 
 public class Films extends StarWarsObj {
     private int filmsid;
@@ -14,14 +20,11 @@ public class Films extends StarWarsObj {
     private String director;
     private String producer;
     private String release_date;
-    private List<Species> species;
-    private List<Starships> starships;
-    private List<Vehicles> vehicles;
-    private List<People> characters;
-    private List<Planets> planets;
-    private URL url;
-    private String created;
-    private String edited;
+    private HashSet<Species> species;
+    private HashSet<Starships> starships;
+    private HashSet<Vehicles> vehicles;
+    private HashSet<People> characters;
+    private HashSet<Planets> planets;
     private static String path = "https://swapi.dev/api/films/";
 
     public Films() {
@@ -88,68 +91,44 @@ public class Films extends StarWarsObj {
         this.release_date = release_date;
     }
 
-    public List<Species> getSpecies() {
+    public HashSet<Species> getSpecies() {
         return species;
     }
 
-    public void setSpecies(List<Species> species) {
+    public void setSpecies(HashSet<Species> species) {
         this.species = species;
     }
 
-    public List<Starships> getStarships() {
+    public HashSet<Starships> getStarships() {
         return starships;
     }
 
-    public void setStarships(List<Starships> starships) {
+    public void setStarships(HashSet<Starships> starships) {
         this.starships = starships;
     }
 
-    public List<Vehicles> getVehicles() {
+    public HashSet<Vehicles> getVehicles() {
         return vehicles;
     }
 
-    public void setVehicles(List<Vehicles> vehicles) {
+    public void setVehicles(HashSet<Vehicles> vehicles) {
         this.vehicles = vehicles;
     }
 
-    public List<People> getCharacters() {
+    public HashSet<People> getCharacters() {
         return characters;
     }
 
-    public void setCharacters(List<People> characters) {
+    public void setCharacters(HashSet<People> characters) {
         this.characters = characters;
     }
 
-    public List<Planets> getPlanets() {
+    public HashSet<Planets> getPlanets() {
         return planets;
     }
 
-    public void setPlanets(List<Planets> planets) {
+    public void setPlanets(HashSet<Planets> planets) {
         this.planets = planets;
-    }
-
-    public URL getUrl() {
-        return url;
-    }
-
-    public void setUrl(URL url) {
-        this.url = url;
-    }
-
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    public String getEdited() {
-        return edited;
-    }
-
-    public void setEdited(String edited) {
-        this.edited = edited;
     }
 
     public int getFilmsid() {
@@ -168,7 +147,56 @@ public class Films extends StarWarsObj {
         this.path = path;
     }
 
+    public HashSet<Integer> getAssociatedPeopleIds(int filmId) throws SQLException, ClassNotFoundException {
+        HashSet<Integer> peopleIdList = new HashSet<>();
+        ResultSet peopleFilmsSet = selectFilmsFromPeopleFilms(filmId);
+        while(peopleFilmsSet.next()) {
+            int peopleId = peopleFilmsSet.getInt("peopleid");
+            peopleIdList.add(peopleId);
+        }
+        return peopleIdList;
+    }
 
+    public HashSet<Integer> getAssociatedPlanetIds(int filmsId) throws SQLException, ClassNotFoundException {
+        HashSet<Integer> planetsIdList = new HashSet<>();
+        ResultSet filmsPlanetsSet = selectFilmsFromFilmsPlanets(filmsId);
+        while(filmsPlanetsSet.next()) {
+            int planetId = filmsPlanetsSet.getInt("planetsid");
+            planetsIdList.add(planetId);
+        }
+        return planetsIdList;
+    }
+
+
+    public HashSet<Integer> getAssociatedSpeciesIds(int filmsId) throws SQLException, ClassNotFoundException {
+        HashSet<Integer> speciesIdList = new HashSet<>();
+        ResultSet filmsSpeciesSet = selectFilmsFromFilmsSpecies(filmsId);
+        while(filmsSpeciesSet.next()) {
+            int speciesId = filmsSpeciesSet.getInt("speciesid");
+            speciesIdList.add(speciesId);
+        }
+        return speciesIdList;
+    }
+
+    public HashSet<Integer> getAssociatedStarshipIds(int filmsId) throws SQLException, ClassNotFoundException {
+        HashSet<Integer> starshipsIdList = new HashSet<>();
+        ResultSet filmsStarshipsSet = selectFilmsFromFilmsStarships(filmsId);
+        while(filmsStarshipsSet.next()) {
+            int starshipId = filmsStarshipsSet.getInt("starshipsid");
+            starshipsIdList.add(starshipId);
+        }
+        return starshipsIdList;
+    }
+
+    public HashSet<Integer> getAssociatedVehicleIds(int filmsId) throws SQLException, ClassNotFoundException {
+        HashSet<Integer> vehiclesIdList = new HashSet<>();
+        ResultSet filmsVehiclesSet = selectFilmsFromFilmsVehicles(filmsId);
+        while(filmsVehiclesSet.next()) {
+            int vehicleId = filmsVehiclesSet.getInt("vehiclesid");
+            vehiclesIdList.add(vehicleId);
+        }
+        return vehiclesIdList;
+    }
 
 
     @Override
@@ -186,9 +214,6 @@ public class Films extends StarWarsObj {
                 ", vehicles=" + vehicles +
                 ", characters=" + characters +
                 ", planets=" + planets +
-                ", url=" + url +
-                ", created='" + created + '\'' +
-                ", edited='" + edited + '\'' +
                 '}';
     }
 }

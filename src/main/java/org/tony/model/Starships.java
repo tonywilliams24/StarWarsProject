@@ -6,7 +6,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+
+import static org.tony.db.SelectStatements.*;
 
 public class Starships extends StarWarsObj {
     private int starshipsid;
@@ -23,11 +27,8 @@ public class Starships extends StarWarsObj {
     private String hyperdrive_rating;
     private String MGLT;
     private String starship_class;
-    private List<Films> films;
-    private List<People> pilots;
-    private String created;
-    private String edited;
-    private URL url;
+    private HashSet<Films> films;
+    private HashSet<People> pilots;
 
     public Starships() {
     }
@@ -165,43 +166,40 @@ public class Starships extends StarWarsObj {
         this.starship_class = starship_class;
     }
 
-    public List<Films> getFilms() {
+    public HashSet<Films> getFilms() {
         return films;
     }
 
-    public void setFilms(List<Films> films) {
+    public void setFilms(HashSet<Films> films) {
         this.films = films;
     }
 
-    public List<People> getPilots() {
+    public HashSet<People> getPilots() {
         return pilots;
     }
 
-    public void setPilots(List<People> pilots) {
+    public void setPilots(HashSet<People> pilots) {
         this.pilots = pilots;
     }
 
-    public String getCreated() {
-        return created;
+    public HashSet<Integer> getAssociatedPeopleIds(int starshipsId) throws SQLException, ClassNotFoundException {
+        HashSet<Integer> peopleIdList = new HashSet<>();
+        ResultSet starshipsPeopleSet = selectStarshipsFromPeopleStarships(starshipsId);
+        while(starshipsPeopleSet.next()) {
+            int peopleId = starshipsPeopleSet.getInt("peopleid");
+            peopleIdList.add(peopleId);
+        }
+        return peopleIdList;
     }
 
-    public void setCreated(String created) {
-        this.created = created;
+    public HashSet<Integer> getAssociatedFilmIds(int starshipsId) throws SQLException, ClassNotFoundException {
+        HashSet<Integer> filmsIdList = new HashSet<>();
+        ResultSet starshipsFilmsSet = selectStarshipsFromFilmsStarships(starshipsId);
+        while(starshipsFilmsSet.next()) {
+            int filmId = starshipsFilmsSet.getInt("filmsid");
+            filmsIdList.add(filmId);
+        }
+        return filmsIdList;
     }
 
-    public String getEdited() {
-        return edited;
-    }
-
-    public void setEdited(String edited) {
-        this.edited = edited;
-    }
-
-    public URL getUrl() {
-        return url;
-    }
-
-    public void setUrl(URL url) {
-        this.url = url;
-    }
 }

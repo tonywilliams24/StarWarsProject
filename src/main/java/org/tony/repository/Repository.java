@@ -11,69 +11,117 @@ import java.util.List;
 import static org.tony.db.SelectStatements.*;
 
 public class Repository {
-    public static List<People> allPeople = new ArrayList<>();
-    public static List<Films> allFilms = new ArrayList<>();
-    public static List<Planets> allPlanets = new ArrayList<>();
-    public static List<Species> allSpecies = new ArrayList<>();
-    public static List<Starships> allStarships = new ArrayList<>();
-    public static List<Vehicles> allVehicles = new ArrayList<>();
+    public static List<People> peopleRepository = new ArrayList<>();
+    public static List<Films> filmsRepository = new ArrayList<>();
+    public static List<Planets> planetsRepository = new ArrayList<>();
+    public static List<Species> speciesRepository = new ArrayList<>();
+    public static List<Starships> starshipsRepository = new ArrayList<>();
+    public static List<Vehicles> vehiclesRepository = new ArrayList<>();
 
     public static void retrieveAllPeopleFromDb() throws SQLException, ClassNotFoundException, MalformedURLException {
-        if(allPeople.isEmpty()) {
-            ResultSet peopleSet = getAllPeople();
+        if(peopleRepository.isEmpty()) {
+            ResultSet peopleSet = selectAllPeople();
             while (peopleSet.next()) {
                 People people = new People(peopleSet);
-                allPeople.add(people);
+                peopleRepository.add(people);
             }
         }
     }
 
     public static void retrieveAllFilmsFromDb() throws SQLException, ClassNotFoundException, MalformedURLException {
-        if(allFilms.isEmpty()) {
+        if(filmsRepository.isEmpty()) {
             ResultSet filmsSet = selectAllFilms();
             while (filmsSet.next()) {
                 Films film = new Films(filmsSet);
-                allFilms.add(film);
+                filmsRepository.add(film);
             }
         }
     }
 
     public static void retrieveAllPlanetsFromDb() throws SQLException, ClassNotFoundException, MalformedURLException {
-        if(allPlanets.isEmpty()) {
+        if(planetsRepository.isEmpty()) {
             ResultSet planetsSet = selectAllPlanets();
             while (planetsSet.next()) {
                 Planets planet = new Planets(planetsSet);
-                allPlanets.add(planet);
+                planetsRepository.add(planet);
             }
         }
     }
 
     public static void retrieveAllSpeciesFromDb() throws SQLException, ClassNotFoundException, MalformedURLException {
-        if(allSpecies.isEmpty()) {
+        if(speciesRepository.isEmpty()) {
             ResultSet speciesSet = selectAllSpecies();
             while (speciesSet.next()) {
                 Species species = new Species(speciesSet);
-                allSpecies.add(species);
+                speciesRepository.add(species);
             }
         }
     }
 
+    public static List<People> getPeopleRepository() {
+        return peopleRepository;
+    }
+
+    public static void setPeopleRepository(List<People> peopleRepository) {
+        Repository.peopleRepository = peopleRepository;
+    }
+
+    public static List<Films> getFilmsRepository() {
+        return filmsRepository;
+    }
+
+    public static void setFilmsRepository(List<Films> filmsRepository) {
+        Repository.filmsRepository = filmsRepository;
+    }
+
+    public static List<Planets> getPlanetsRepository() {
+        return planetsRepository;
+    }
+
+    public static void setPlanetsRepository(List<Planets> planetsRepository) {
+        Repository.planetsRepository = planetsRepository;
+    }
+
+    public static List<Species> getSpeciesRepository() {
+        return speciesRepository;
+    }
+
+    public static void setSpeciesRepository(List<Species> speciesRepository) {
+        Repository.speciesRepository = speciesRepository;
+    }
+
+    public static List<Starships> getStarshipsRepository() {
+        return starshipsRepository;
+    }
+
+    public static void setStarshipsRepository(List<Starships> starshipsRepository) {
+        Repository.starshipsRepository = starshipsRepository;
+    }
+
+    public static List<Vehicles> getVehiclesRepository() {
+        return vehiclesRepository;
+    }
+
+    public static void setVehiclesRepository(List<Vehicles> vehiclesRepository) {
+        Repository.vehiclesRepository = vehiclesRepository;
+    }
+
     public static void retrieveAllStarshipsFromDb() throws SQLException, ClassNotFoundException, MalformedURLException {
-        if (allStarships.isEmpty()) {
+        if (starshipsRepository.isEmpty()) {
             ResultSet StarshipsSet = selectAllStarships();
             while (StarshipsSet.next()) {
                 Starships starship = new Starships(StarshipsSet);
-                allStarships.add(starship);
+                starshipsRepository.add(starship);
             }
         }
     }
 
         public static void retrieveAllVehiclesFromDb() throws SQLException, ClassNotFoundException, MalformedURLException {
-            if (allVehicles.isEmpty()) {
+            if (vehiclesRepository.isEmpty()) {
                 ResultSet vehiclesSet = selectAllVehicles();
                 while (vehiclesSet.next()) {
                     Vehicles vehicle = new Vehicles(vehiclesSet);
-                    allVehicles.add(vehicle);
+                    vehiclesRepository.add(vehicle);
                 }
             }
         }
