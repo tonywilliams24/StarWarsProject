@@ -1,6 +1,7 @@
 package org.tony.model;
 
 import org.tony.db.SelectStatements;
+import org.tony.repository.Repository;
 
 import java.net.MalformedURLException;
 import java.net.URL;

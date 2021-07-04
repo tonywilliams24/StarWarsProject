@@ -53,10 +53,16 @@ public class DeleteStatements {
         } else if (starWarsObj0 instanceof Films && starWarsObj1 instanceof Vehicles) {
             return getDeleteFromFilmsVehiclesTablePreparedStatement((Films) starWarsObj0, (Vehicles) starWarsObj1, conn);
 
+        } else if (starWarsObj0 instanceof Species && starWarsObj1 instanceof Planets) {
+            return getDeleteFromSpeciesPlanetsTablePreparedStatement((Species) starWarsObj0, (Planets) starWarsObj1, conn);
+
+
         } else if (starWarsObj0 instanceof Planets && starWarsObj1 instanceof People) {
             return getDeleteFromPeoplePlanetsTablePreparedStatement((People) starWarsObj1, (Planets) starWarsObj0, conn);
         } else if (starWarsObj0 instanceof Planets && starWarsObj1 instanceof Films) {
             return getDeleteFromFilmsPlanetsTablePreparedStatement((Films) starWarsObj1, (Planets) starWarsObj0, conn);
+        } else if (starWarsObj0 instanceof Planets && starWarsObj1 instanceof Species) {
+            return getDeleteFromSpeciesPlanetsTablePreparedStatement((Species) starWarsObj1, (Planets) starWarsObj0, conn);
 
         } else if (starWarsObj0 instanceof Species && starWarsObj1 instanceof People) {
             return getDeleteFromPeopleSpeciesTablePreparedStatement((People) starWarsObj1, (Species) starWarsObj0, conn);
@@ -173,6 +179,13 @@ public class DeleteStatements {
         PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM films_vehicles WHERE filmsid = ? AND vehiclesid = ?");
         preparedStatement.setInt(1, film.getFilmsid());
         preparedStatement.setInt(2, vehicle.getVehiclesid());
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getDeleteFromSpeciesPlanetsTablePreparedStatement(Species species, Planets planet, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM species_planets WHERE speciesid = ? AND planetsid = ?");
+        preparedStatement.setInt(1, species.getSpeciesid());
+        preparedStatement.setInt(2, planet.getPlanetsid());
         return preparedStatement;
     }
 }

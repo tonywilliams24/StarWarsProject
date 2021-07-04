@@ -60,10 +60,15 @@ public class InsertStatements {
         } else if (starWarsObj0 instanceof Films && starWarsObj1 instanceof Vehicles) {
                 return getInsertIntoFilmsVehiclesTablePreparedStatement((Films) starWarsObj0, (Vehicles) starWarsObj1, conn);
 
+        } else if (starWarsObj0 instanceof Species && starWarsObj1 instanceof Planets) {
+            return getInsertIntoSpeciesPlanetsTablePreparedStatement((Species) starWarsObj0, (Planets) starWarsObj1, conn);
+
         } else if (starWarsObj0 instanceof Planets && starWarsObj1 instanceof People) {
                 return getInsertIntoPeoplePlanetsTablePreparedStatement((People) starWarsObj1, (Planets) starWarsObj0, conn);
         } else if (starWarsObj0 instanceof Planets && starWarsObj1 instanceof Films) {
                 return getInsertIntoFilmsPlanetsTablePreparedStatement((Films) starWarsObj1, (Planets) starWarsObj0, conn);
+        } else if (starWarsObj0 instanceof Planets && starWarsObj1 instanceof Species) {
+            return getInsertIntoSpeciesPlanetsTablePreparedStatement((Species) starWarsObj1, (Planets) starWarsObj0, conn);
 
         } else if (starWarsObj0 instanceof Species && starWarsObj1 instanceof People) {
                 return getInsertIntoPeopleSpeciesTablePreparedStatement((People) starWarsObj1, (Species) starWarsObj0, conn);
@@ -231,6 +236,13 @@ public class InsertStatements {
     public static PreparedStatement getInsertIntoFilmsPlanetsTablePreparedStatement(Films film, Planets planet, Connection conn) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO films_planets(filmsid, planetsid) VALUES (?,?)");
         preparedStatement.setInt(1, film.getFilmsid());
+        preparedStatement.setInt(2, planet.getPlanetsid());
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getInsertIntoSpeciesPlanetsTablePreparedStatement(Species species, Planets planet, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO species_planets(speciesid, planetsid) VALUES (?,?)");
+        preparedStatement.setInt(1, species.getSpeciesid());
         preparedStatement.setInt(2, planet.getPlanetsid());
         return preparedStatement;
     }

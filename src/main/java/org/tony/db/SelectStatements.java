@@ -261,6 +261,30 @@ public class SelectStatements {
         return preparedStatement.executeQuery();
     }
 
+    public static ResultSet selectSpeciesPlanetsFromSpeciesPlanets(int speciesid, int planetsid) throws SQLException, ClassNotFoundException {
+        Connection conn = DbConnection.createDbConnection();
+        PreparedStatement preparedStatement = getSelectSpeciesPlanetsFromSpeciesPlanetsPreparedStatement(speciesid, planetsid, conn);
+        return preparedStatement.executeQuery();
+    }
+
+    public static ResultSet selectSpeciesFromSpeciesPlanets(int speciesid) throws SQLException, ClassNotFoundException {
+        Connection conn = DbConnection.createDbConnection();
+        PreparedStatement preparedStatement = getSelectSpeciesFromSpeciesPlanetsPreparedStatement(speciesid, conn);
+        return preparedStatement.executeQuery();
+    }
+
+    public static ResultSet selectPlanetsFromSpeciesPlanets(int planetsid) throws SQLException, ClassNotFoundException {
+        Connection conn = DbConnection.createDbConnection();
+        PreparedStatement preparedStatement = getSelectPlanetsFromSpeciesPlanetsPreparedStatement(planetsid, conn);
+        return preparedStatement.executeQuery();
+    }
+
+    public static ResultSet selectAllSpeciesPlanets() throws SQLException, ClassNotFoundException {
+        Connection conn = DbConnection.createDbConnection();
+        PreparedStatement preparedStatement = getSelectAllSpeciesPlanetsPreparedStatement(conn);
+        return preparedStatement.executeQuery();
+    }
+
     public static ResultSet selectFilmsSpeciesFromFilmsSpecies(int filmsid, int speciesid) throws SQLException, ClassNotFoundException {
         Connection conn = DbConnection.createDbConnection();
         PreparedStatement preparedStatement = getSelectFilmsSpeciesFromFilmsSpeciesPreparedStatement(filmsid, speciesid, conn);
@@ -565,6 +589,29 @@ public class SelectStatements {
 
     public static PreparedStatement getSelectAllFilmsPlanetsPreparedStatement(Connection conn) throws SQLException {
         return conn.prepareStatement("SELECT * FROM films_planets");
+    }
+
+    public static PreparedStatement getSelectSpeciesPlanetsFromSpeciesPlanetsPreparedStatement(int speciesid, int planetsid, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM species_planets WHERE speciesid = ? AND planetsid = ?");
+        preparedStatement.setInt(1, speciesid);
+        preparedStatement.setInt(2, planetsid);
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getSelectSpeciesFromSpeciesPlanetsPreparedStatement(int speciesid, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM species_planets WHERE speciesid = ?");
+        preparedStatement.setInt(1, speciesid);
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getSelectPlanetsFromSpeciesPlanetsPreparedStatement(int planetsid, Connection conn) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM species_planets WHERE planetsid = ?");
+        preparedStatement.setInt(1, planetsid);
+        return preparedStatement;
+    }
+
+    public static PreparedStatement getSelectAllSpeciesPlanetsPreparedStatement(Connection conn) throws SQLException {
+        return conn.prepareStatement("SELECT * FROM species_planets");
     }
 
     public static PreparedStatement getSelectFilmsSpeciesFromFilmsSpeciesPreparedStatement(int filmsid, int speciesid, Connection conn) throws SQLException {
