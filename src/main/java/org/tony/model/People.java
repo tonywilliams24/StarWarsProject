@@ -22,7 +22,7 @@ public class People extends StarWarsObj {
     private String eye_color;
     private String birth_year;
     private String gender;
-    private Planets homeworld;
+    private HashSet<Planets> homeworld;
     private HashSet<Species> species;
     private HashSet<Films> films;
     private HashSet<Starships> starships;
@@ -118,11 +118,11 @@ public class People extends StarWarsObj {
         this.gender = gender;
     }
 
-    public Planets getHomeworld() {
+    public HashSet<Planets> getHomeworld() {
         return homeworld;
     }
 
-    public void setHomeworld(Planets homeworld) {
+    public void setHomeworld(HashSet<Planets> homeworld) {
         this.homeworld = homeworld;
     }
 
@@ -210,17 +210,17 @@ public class People extends StarWarsObj {
 
     @Override
     public String toString() {
-        return "People{" +
-                "thisid=" + thisid +
-                ", name='" + name + '\'' +
-                ", height=" + height +
-                ", mass=" + mass +
-                ", hair_color='" + hair_color + '\'' +
-                ", skin_color='" + skin_color + '\'' +
-                ", eye_color='" + eye_color + '\'' +
-                ", birth_year='" + birth_year + '\'' +
-                ", gender='" + gender + '\'' +
-                ", homeworld='" + homeworld + '\'' +
-                '}';
+        return "People{\n" +
+                "thisid=\n" + thisid +
+                ", name='\n" + name + '\'' +
+                ", height=\n" + height +
+                ", mass=\n" + mass +
+                ", hair_color='\n" + hair_color + '\'' +
+                ", skin_color='\n" + skin_color + '\'' +
+                ", eye_color='\n" + eye_color + '\'' +
+                ", birth_year='\n" + birth_year + '\'' +
+                ", gender='\n" + gender + '\'' +
+                ", homeworld='\n" + homeworld + '\'' +
+                "}\n" + super.toString();
     }
 }

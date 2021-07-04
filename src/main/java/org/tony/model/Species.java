@@ -182,16 +182,16 @@ public class Species extends StarWarsObj {
 
     @Override
     public String toString() {
-        return "Species{" +
-                "speciesid=" + speciesid +
-                ", name='" + name + '\'' +
-                ", designation='" + designation + '\'' +
-                ", average_height=" + average_height +
-                ", skin_colors='" + skin_colors + '\'' +
-                ", hair_colors='" + hair_colors + '\'' +
-                ", eye_colors='" + eye_colors + '\'' +
-                ", average_lifespan=" + average_lifespan +
-                ", language='" + language + '\'' +
-                '}';
+        return "Species{\n" +
+                "speciesid=\n" + speciesid +
+                ", name='\n" + name + '\'' +
+                ", designation='\n" + designation + '\'' +
+                ", average_height=\n" + average_height +
+                ", skin_colors='\n" + skin_colors + '\'' +
+                ", hair_colors='\n" + hair_colors + '\'' +
+                ", eye_colors='\n" + eye_colors + '\'' +
+                ", average_lifespan=\n" + average_lifespan +
+                ", language='\n" + language + '\'' +
+                "}\n" + super.toString();
     }
 }

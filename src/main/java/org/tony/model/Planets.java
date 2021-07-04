@@ -180,4 +180,22 @@ public class Planets extends StarWarsObj {
         return speciesIdList;
     }
     
+    @Override
+    public String toString() {
+        return "Planets{\n" +
+                "planetsid=\n" + planetsid +
+                ", name='\n" + name + '\'' +
+                ", rotation_period='\n" + rotation_period + '\'' +
+                ", orbital_period='\n" + orbital_period + '\'' +
+                ", diameter='\n" + diameter + '\'' +
+                ", climate='\n" + climate + '\'' +
+                ", gravity='\n" + gravity + '\'' +
+                ", terrain='\n" + terrain + '\'' +
+                ", surface_water='\n" + surface_water + '\'' +
+                ", population='\n" + population + '\'' +
+                ", residents=\n" + residents +
+                ", films=\n" + films +
+                ", species=\n" + species +
+                "} \n" + super.toString();
+    }
 }

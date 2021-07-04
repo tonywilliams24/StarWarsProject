@@ -202,4 +202,25 @@ public class Starships extends StarWarsObj {
         return filmsIdList;
     }
 
+    @Override
+    public String toString() {
+        return "Starships{\n" +
+                "starshipsid=\n" + starshipsid +
+                ", name='\n" + name + '\'' +
+                ", model='\n" + model + '\'' +
+                ", manufacturer='\n" + manufacturer + '\'' +
+                ", cost_in_credits='\n" + cost_in_credits + '\'' +
+                ", length='\n" + length + '\'' +
+                ", max_atmosphering_speed='\n" + max_atmosphering_speed + '\'' +
+                ", crew='\n" + crew + '\'' +
+                ", passengers='\n" + passengers + '\'' +
+                ", cargo_capacity='\n" + cargo_capacity + '\'' +
+                ", consumables='\n" + consumables + '\'' +
+                ", hyperdrive_rating='\n" + hyperdrive_rating + '\'' +
+                ", MGLT='\n" + MGLT + '\'' +
+                ", starship_class='\n" + starship_class + '\'' +
+                ", films=\n" + films +
+                ", pilots=\n" + pilots +
+                "} \n" + super.toString();
+    }
 }

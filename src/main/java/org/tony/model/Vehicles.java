@@ -25,6 +25,7 @@ public class Vehicles extends StarWarsObj {
     private String vehicle_class;
     private HashSet<Films> films;
     private HashSet<People> pilots;
+
     public Vehicles() {
     }
 
@@ -178,4 +179,23 @@ public class Vehicles extends StarWarsObj {
         return filmsIdList;
     }
 
+    @Override
+    public String toString() {
+        return "Vehicles{\n" +
+                "vehiclesid=\n" + vehiclesid +
+                ", name='\n" + name + '\'' +
+                ", model='\n" + model + '\'' +
+                ", manufacturer='\n" + manufacturer + '\'' +
+                ", cost_in_credits='\n" + cost_in_credits + '\'' +
+                ", length='\n" + length + '\'' +
+                ", max_atmosphering_speed='\n" + max_atmosphering_speed + '\'' +
+                ", crew='\n" + crew + '\'' +
+                ", passengers='\n" + passengers + '\'' +
+                ", cargo_capacity='\n" + cargo_capacity + '\'' +
+                ", consumables='\n" + consumables + '\'' +
+                ", vehicle_class='\n" + vehicle_class + '\'' +
+                ", films=\n" + films +
+                ", pilots=\n" + pilots +
+                "} \n" + super.toString();
+    }
 }

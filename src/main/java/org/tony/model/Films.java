@@ -201,19 +201,19 @@ public class Films extends StarWarsObj {
 
     @Override
     public String toString() {
-        return "Films{" +
-                "filmsid=" + filmsid +
-                ", title='" + title + '\'' +
-                ", episode_id=" + episode_id +
-                ", opening_crawl='" + opening_crawl + '\'' +
-                ", director='" + director + '\'' +
-                ", producer='" + producer + '\'' +
-                ", release_date='" + release_date + '\'' +
-                ", species=" + species +
-                ", starships=" + starships +
-                ", vehicles=" + vehicles +
-                ", characters=" + characters +
-                ", planets=" + planets +
-                '}';
+        return "Films{\n" +
+                "filmsid=\n" + filmsid +
+                ", title='\n" + title + '\'' +
+                ", episode_id=\n" + episode_id +
+                ", opening_crawl='\n" + opening_crawl + '\'' +
+                ", director='\n" + director + '\'' +
+                ", producer='\n" + producer + '\'' +
+                ", release_date='\n" + release_date + '\'' +
+                ", species=\n" + species +
+                ", starships=\n" + starships +
+                ", vehicles=\n" + vehicles +
+                ", characters=\n" + characters +
+                ", planets=\n" + planets +
+                "}\n" + super.toString();
     }
 }
